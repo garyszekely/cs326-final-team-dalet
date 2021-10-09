@@ -1,7 +1,7 @@
 # Milestone 0
 
-##Team Overview
+### Team Overview
 Gary Szekely (garyszekely), Dang Le Nguyen (DanGithub200), 
 
-##Idea
+### Idea
 
