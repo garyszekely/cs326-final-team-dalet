@@ -9,7 +9,6 @@
   - Clubs
     -
     -
-
 ## Division of Labor (TODO: After we finish everytrhing)
   - Gary Szekely
     -
