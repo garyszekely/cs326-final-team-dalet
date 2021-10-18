@@ -2,8 +2,10 @@
 
 ## Data Interactions
   - Students
-    -
-    -
+    - browse list of clubs
+    - filter list of clubs
+    - submit join request
+    - add likes to clubs
   - Clubs
     -
     -
