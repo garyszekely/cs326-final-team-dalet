@@ -5,13 +5,13 @@
   -
 
 ## Division of Labor (TODO: After we finish everytrhing)
-  -Gary Szekely
+  - Gary Szekely
     -
     -
-  -Dang Le Nguyen
+  - Dang Le Nguyen
     -
     -
-  -Ashwin Gowda
+  - Ashwin Gowda
     -
     -
 # TODO: Others... 
