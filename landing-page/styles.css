@@ -60,13 +60,13 @@ html, body {
 }
 
 .signup-btn {
-    color: red !important;
+    color: green !important;
     background-color: transparent !important;
-    border-color: red !important;
+    border-color: green !important;
     width: 50% !important;
 }
 
 .signup-btn:hover {
     color: #F0F2F5 !important;
-    background-color: red !important;
+    background-color: green !important;
 }
