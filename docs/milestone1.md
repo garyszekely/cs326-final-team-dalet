@@ -10,6 +10,7 @@
   - Clubs
     -
     -
+
 ## Division of Labor (TODO: After we finish everything)
   - Gary Szekely
     -
@@ -17,7 +18,5 @@
   - Dang Le Nguyen
     -
     -
-  - Ashwin Gowda
-    -
-    -
+
 # TODO: Others... 

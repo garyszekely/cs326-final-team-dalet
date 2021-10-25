@@ -8,10 +8,7 @@
 **GitHub Username:** garyszekely
 
 **Name:** Dang Le Nguyen  
-**GitHub Username:** DanGithub200
-
-**Name:** Ashwin Gowda  
-**GitHub Username:**
+**GitHub Username:** DanGithub200, Dang592
 
 ### Innovative Idea
 
