@@ -45,7 +45,7 @@
     align-items: center;
 }
 
-#login-btn, #student-signup-btn, #club-signup-btn, #modal-signup-btn {
+#login-btn, #student-signup-btn, #club-signup-btn, #modal-signup-btn, #club-search-btn {
     color: green;
     background-color: transparent;
     border-color: green;
@@ -56,4 +56,62 @@
     color: #F0F2F5;
     background-color: green;
     font-weight: bold;
+}
+
+
+.grid-area-photo { grid-area: photo; }
+.grid-area-name { grid-area: name; }
+.grid-area-clubs { grid-area: clubs; }
+.grid-area-description { grid-area: description; }
+.grid-area-posts { grid-area: posts; }
+.grid-area-friends { grid-area: friends; }
+.grid-area-schedule { grid-area: schedule; }
+.grid-area-info { grid-area: info; }
+.grid-area-like { grid-area: like; }
+.grid-area-search { grid-area: search; }
+
+.student-home-page{
+    width: 80%;
+    height: 100%;
+    display: grid;
+    grid-template-areas:
+    'photo photo name name clubs clubs'
+    'photo photo name name clubs clubs'
+    'schedule schedule schedule schedule schedule schedule'
+    'schedule schedule schedule schedule schedule schedule'
+    'schedule schedule schedule schedule schedule schedule';
+    background-color: lightgreen;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.club-home-page{
+    width: 80%;
+    height: 100%;
+    display: grid;
+    grid-template-areas:
+    'photo photo like like search search'
+    'photo photo like like search search'
+    'info info info description description description'
+    'info info info description description description'
+    'info info info description description description'
+    'info info info description description description';
+    background-color: lightgreen;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.student-personal-page{
+    width: 80%;
+    height: 100%;
+    display: grid;
+    grid-template-areas:
+    'photo photo name name clubs clubs'
+    'photo photo description description clubs clubs'
+    'posts posts posts posts friends friends'
+    'posts posts posts posts friends friends'
+    'posts posts posts posts friends friends';
+    background-color: lightgreen;
+    grid-gap: 10px;
+    padding: 10px;
 }
