@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+        <link rel="stylesheet" href="../styles/profile-page-styles.css">
+        <title>Club Profile Page</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand" style="background-color: green; height: 10vh;">
+            <h1 class="navbar-brand" style="font-family: Lobster; color: white; font-size: 25pt; width: 16%; text-align: center;">ClubConnect</h1>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Find Clubs</a>
+                </li>
+            </ul>
+            <form class="form-inline">
+                <input type="search" class="form-control" placeholder="Search..." style="margin-right: 20px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="color: white;">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </form>
+        </nav>
+        <div class="main-container">
+            <div class="profile-container">
+                <div class="profile-header-container">
+                    <div class="profile-picture-container">
+                        <img width="150px" height="150x" style="border-radius: 50%; border: 2px solid black;" src="default.jpg" />
+                    </div>
+                    <div class="name-bio-container">
+                        <h1>ClubName</h1>
+                        <p style="color: grey;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.</p>
+                    </div>
+                </div>
+                <div class="profile-main-container">
+                    <div class="profile-sidebar-container">
+                        <h4>Total Members</h4>
+                        <h5>2</h5>
+                        <hr style="width: 75%">
+                        <h4>Total Posts</h4>
+                        <h5>2</h5>
+                        <hr style="width: 75%">
+                        <h4>Created</h4>
+                        <h5>Oct 2021</h5>
+                        <hr style="width: 75%">
+                        <h4>Joined</h4>
+                        <h5>Oct 2021</h5>
+                    </div>
+                    <div class="feed-container">
+                        <br>
+                        <div class="card" style="margin-bottom: 20px; width: 90%;">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <img width="50px" height="50px" style="border-radius: 50%; border: 1px solid black; margin-right: 20px;" src="default.jpg" />
+                                    ClubName
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.</p>
+                                
+                            </div>
+                            <div class="card-footer text-muted">October 21, 2021 at 10:03 AM</div>
+                        </div>
+                        <div class="card" style="margin-bottom: 20px; width: 90%;">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <img width="50px" height="50px" style="border-radius: 50%; border: 1px solid black; margin-right: 20px;" src="default.jpg" />
+                                    ClubName
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.</p>
+                                
+                            </div>
+                            <div class="card-footer text-muted">October 20, 2021 at 7:54 PM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-container">
+                <div class="controls-container">
+                    <button id="join-club-btn" class="btn btn-primary">Join Club</button>
+                </div>
+                <div class="clubs-container">
+                    <h3 style="text-align: center;">Members</h3>
+                    <hr>
+                    <ul>
+                        <li>FirstName LastName, <b>President</b></li>
+                        <li>FirstName LastName, <b>Member</b></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>
