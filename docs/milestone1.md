@@ -45,10 +45,19 @@
   ### Club Personal Profile Page
 
   ### Student Viewing Another Student's Profile Page
+  ![Student to Student Profile Page Wireframes Image](StudentToStudentProfilePageWireframes.png "Student Viewing Another Student's Profile Page")
+
+  The wireframe for the Student to Student's Profile Page. This is where the students will interact other students.
 
   ### Club Viewing Member's Profile Page
+  ![Club to Member Profile Page Wireframes Image](ClubToStudentProfilePageWireframes.png "Club Viewing Member's Profile Page")
+
+  The wireframe for the Club to Member's Profile Page. This is where the clubs will interact with their members.
 
   ### Club Profile Page
+  ![Club Profile Page Wireframes Image](ClubProfilePageWireframes.png "Club Profile Page")
+
+  The wireframe for the Club's Profile Page. This is where the student's will interact with the clubs.
 
 ## Part 2: HTML and CSS
   ### Landing Page
