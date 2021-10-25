@@ -82,7 +82,7 @@
 
   ### Club Profile Page
   ![Club Profile Page Image](ClubProfilePage.png "Club Profile Page")
-  The Club's Profile Page from the view of students. This is where students will interact with clubs by joining their club, seeing their posts, as well as other general informaation. 
+  The Club's Profile Page from the view of students. This is where students will interact with clubs by joining their club, liking the club, seeing their posts, as well as other general informaation. 
 
 ## Labor Division
   ### Gary Szekely

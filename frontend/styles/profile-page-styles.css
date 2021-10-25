@@ -90,14 +90,14 @@
     overflow-y: scroll;
 }
 
-#add-friends-btn, #join-club-btn, #remove-member-btn {
+#add-friends-btn, #join-club-btn, #remove-member-btn, #like-club-btn {
     background-color: transparent;
     color: green;
     border-color: green;
     width: 200px;
 }
 
-#add-friends-btn:hover, #join-club-btn:hover, #remove-member-btn:hover {
+#add-friends-btn:hover, #join-club-btn:hover, #remove-member-btn:hover, #like-club-btn:hover {
     background-color: green;
     color: white;
     font-weight: bold;
