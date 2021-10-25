@@ -1,13 +1,10 @@
-html, body {
-    background-color: #F0F2F5 !important;
-}
-
 .logo-container {
     width: 100vw;
     height: 25vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #F0F2F5;
 }
 
 .main-container {
@@ -17,21 +14,22 @@ html, body {
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
+    background-color: #F0F2F5;
 }
 
 .footer-container {
     width: 100vw;
     height: 10vh;
-    background-color: green;
     display: flex;
     align-items: center;
     padding-left: 10px;
     color: #F0F2F5;
+    background-color: green;
 }
 
 .login-container {
     border-right: 1px solid black;
-    width: 50%;
+    width: 40%;
     height: 75%;
     display: flex;
     flex-direction: column;
@@ -40,33 +38,22 @@ html, body {
 
 .signup-container {
     border-left: 1px solid black;
-    width: 50%;
+    width: 40%;
     height: 75%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.login-btn {
-    color: green !important;
-    background-color: transparent !important;
-    border-color: green !important;
-    width: 50% !important;
+#login-btn, #student-signup-btn, #club-signup-btn, #modal-signup-btn {
+    color: green;
+    background-color: transparent;
+    border-color: green;
+    width: 200px;
 }
 
-.login-btn:hover {
-    color: #F0F2F5 !important;
-    background-color: green !important;
-}
-
-.signup-btn {
-    color: green !important;
-    background-color: transparent !important;
-    border-color: green !important;
-    width: 50% !important;
-}
-
-.signup-btn:hover {
-    color: #F0F2F5 !important;
-    background-color: green !important;
+#login-btn:hover, #student-signup-btn:hover, #club-signup-btn:hover, #modal-signup-btn:hover {
+    color: #F0F2F5;
+    background-color: green;
+    font-weight: bold;
 }
