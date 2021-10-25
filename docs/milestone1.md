@@ -1,13 +1,13 @@
 # Milestone 1
 
 ## Data Interactions
-  - Students
+  # Students
     - browse list of clubs
     - filter list of clubs
     - submit join request
     - add likes to clubs
     
-  - Clubs
+  # Clubs
     -
     -
 
