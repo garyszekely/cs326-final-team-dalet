@@ -2,12 +2,23 @@
 
 ## Part 0: Data Interactions
   ### Students
-  - browse list of clubs
-  - filter list of clubs
-  - submit join request
-  - add likes to clubs
+  - Login/Signup
+  - View Homepage 
+  - View Personal Profile Page
+  - Post
+  - View Club's and other Student's Profile Pages
+  - Browse List of Clubs
+  - Filter List of Clubs
+  - Submit Friend Request
+  - Submit Join Request
+  - Add Likes to Clubs
   ### Clubs
-  -
+  - Login/Signup
+  - View Homepage 
+  - View Personal Profile Page
+  - Post
+  - View Member's Profile Pages
+  - Remove Members
 
 ## Part 1: Wireframes
   ### Landing Page
