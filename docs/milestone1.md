@@ -59,6 +59,11 @@
 
   The wireframe for the Club's Profile Page. This is where the student's will interact with the clubs.
 
+  ### Find Clubs Page
+  ![Find Clubs Page Wireframes Image](wireframes/FindClubsPageWireframes.png "Find Clubs Page")
+
+  The wireframe for the Find Clubs Page. This is where student wiill search and find clubs.
+
 ## Part 2: HTML and CSS
   ### Landing Page
   ![Landing Page Image](html-and-css/LandingPage.png "Landing Page")
@@ -67,10 +72,12 @@
 
   #### Student Signup
   ![Student Signup Image](html-and-css/StudentSignup.png "Student Signup")
+
   The Student Signup modal with a signup form. We added a "X" and a "Sign Up" button for the user's navigation.
 
   #### Club Signup
   ![Club Signup Image](html-and-css/ClubSignup.png "Club Signup")
+
   The Club Signup modal with a signup form. We added a "X" and a "Sign Up" button for the user's navigation.
 
   ### Student Homepage
@@ -83,21 +90,30 @@
 
   ### Student Viewing Another Student's Profile Page
   ![Student Viewing Another Student's Profile Page Image](html-and-css/StudentToStudentProfilePage.png "Student Viewing Another Student's Profile Page")
+
   The Student's Profile Page from the view of another student. This is how student's can interact with another by adding them as a friend, seeing their posts, as well as other general information.
 
   ### Club Viewing Member's Profile Page
   ![Club Viewing Member's Profile Page Image](html-and-css/ClubToStudentProfilePage.png "Club Viewing Member's Profile Page")
+
   The Student's Profile Page from the view of a club. This is how club's can interact with their members, such as removing them, seeing their posts, as well as other general information.
 
   ### Club Profile Page
   ![Club Profile Page Image](html-and-css/ClubProfilePage.png "Club Profile Page")
+
   The Club's Profile Page from the view of students. This is where students will interact with clubs by joining their club, liking the club, seeing their posts, as well as other general informaation. 
+
+  ### Find Clubs Page
+  ![Find Clubs Page Image](html-and-css/FindClubsPage.png "Find Clubs Page")
+
+  The Find Clubs Page from the view of the students. This is where the students will search and join clubs.
 
 ## Labor Division
   ### Gary Szekely
   - Landing Page
   - Landing Page Signup Modals
   - Profile Pages
+  - Find Clubs Page
   ### Dang Le Nguyen
-  - Homepages
+  - Home Page
   - Personal Profile Pages
