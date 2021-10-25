@@ -76,14 +76,14 @@
     height: 140%;
     display: grid;
     grid-template-areas:
-    'photo photo name name clubs clubs'
-    'photo photo name name clubs clubs'
+    'photo photo empty1 clubs clubs empty2'
+    'schedule schedule schedule schedule schedule schedule'
     'schedule schedule schedule schedule schedule schedule'
     'schedule schedule schedule schedule schedule schedule'
     'schedule schedule schedule schedule schedule schedule';
     background-color: lightgreen;
-    grid-gap: 10px;
-    padding: 10px;
+    grid-gap: 5px;
+    padding: 5px;
 }
 
 .club-home-page{
@@ -91,12 +91,12 @@
     height: 140%;
     display: grid;
     grid-template-areas:
-    'photo photo like like empty search'
-    'photo photo like like empty search'
-    'info info description description description description'
-    'info info description description description description'
-    'info info description description description description'
-    'info info description description description description';
+    'photo photo like empty1 search empty2'
+    'photo photo like empty1 search empty2'
+    'info info description description description empty2'
+    'info info description description description empty2'
+    'info info description description description empty2'
+    'info info description description description empty2';
     background-color: lightgreen;
     grid-gap: 10px;
     padding: 10px;
@@ -107,19 +107,23 @@
     height: 140%;
     display: grid;
     grid-template-areas:
-    'photo photo name name clubs clubs'
+    'name name description description clubs clubs'
     'photo photo description description clubs clubs'
     'posts posts posts posts friends friends'
     'posts posts posts posts friends friends'
     'posts posts posts posts friends friends';
     background-color: lightgreen;
-    grid-gap: 10px;
-    padding: 10px;
+    grid-gap: 1px;
+    padding: 1px;   
 }
 
 .photo-size{
     width: 500px;
     height: 250px;
+}
+.student-photo-size{
+    width: 200px;
+    height: 200px;
 }
 
 .thumb-size{
@@ -136,6 +140,7 @@
 .description-size{
     width: 600px;
     height: 300px;
+    margin-bottom: 10px;
 }
 
 
