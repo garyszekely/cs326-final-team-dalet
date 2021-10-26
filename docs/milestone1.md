@@ -37,12 +37,16 @@
   The wireframe for the Club Signup modal on the Landing Page. The idea was to have a modal slide down when club's click the "Sign Up as Club" button.
 
   ### Student Homepage
+  ![Club Signup Wireframes Image](wireframes/StudentHomePageWireframes.png "Club Signup Wireframes")
 
   ### Club Homepage
+  ![Club Signup Wireframes Image](wireframes/ClubHomePageWireframes.png "Club Signup Wireframes")
 
   ### Student Personal Profile Page
+  ![Club Signup Wireframes Image](wireframes/StudentPersonalPageWireframes.png "Club Signup Wireframes")
 
   ### Club Personal Profile Page
+  ![Club Signup Wireframes Image](wireframes/ClubPersonalPageWireframes.png "Club Signup Wireframes")
 
   ### Student Viewing Another Student's Profile Page
   ![Student to Student Profile Page Wireframes Image](wireframes/StudentToStudentProfilePageWireframes.png "Student Viewing Another Student's Profile Page")
