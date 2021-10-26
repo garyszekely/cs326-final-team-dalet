@@ -1,12 +1,3 @@
-.logo-container {
-    width: 100vw;
-    height: 25vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #F0F2F5;
-}
-
 .main-container {
     width: 100vw;
     height: 65vh;
@@ -27,36 +18,14 @@
     background-color: green;
 }
 
-.login-container {
-    border-right: 1px solid black;
-    width: 40%;
-    height: 75%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.signup-container {
-    border-left: 1px solid black;
-    width: 40%;
-    height: 75%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#login-btn, #student-signup-btn, #club-signup-btn, #modal-signup-btn, #club-search-btn {
+#club-search-btn {
     color: green;
     background-color: transparent;
     border-color: green;
     width: 200px;
 }
 
-#login-btn:hover, #student-signup-btn:hover, #club-signup-btn:hover, #modal-signup-btn:hover {
-    color: #F0F2F5;
-    background-color: green;
-    font-weight: bold;
-}
+
 
 
 .grid-area-photo { grid-area: photo;}
@@ -113,8 +82,8 @@
     'info info description description description empty2'
     'info info description description description empty2';
     background-color: lightgreen;
-    grid-gap: 10px;
-    padding: 10px;
+    grid-gap: 5px;
+    padding: 5px;
 }
 
 .club-personal-page{
@@ -129,8 +98,8 @@
     'info info description description description empty2'
     'info info description description description empty2';
     background-color: lightgreen;
-    grid-gap: 10px;
-    padding: 10px;
+    grid-gap: 5px;
+    padding: 5px;
 }
 
 .photo-size{
@@ -146,17 +115,3 @@
     width: 50px;
     height: 50px;
 }
-
-.club-info-size{
-    width: 500px;
-    height: 300px;
-    margin-bottom: 10px;
-}
-
-.description-size{
-    width: 600px;
-    height: 300px;
-    margin-bottom: 10px;
-}
-
-
