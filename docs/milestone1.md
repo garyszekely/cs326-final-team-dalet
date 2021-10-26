@@ -120,8 +120,9 @@
   ### Gary Szekely
   - Landing Page
   - Landing Page Signup Modals
-  - Profile Pages
-  - Find Clubs Page
+  - Profile Interaction Pages
+  - Find Clubs HTML
   ### Dang Le Nguyen
-  - Home Page
+  - Home Pages
   - Personal Profile Pages
+  - Find Club Wireframe
