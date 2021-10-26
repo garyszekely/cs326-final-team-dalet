@@ -1,3 +1,8 @@
+.navbar {
+    background-color: green; 
+    height: 10vh;
+}
+
 .nav-link {
     color: white;
     font-size: 15pt;
@@ -6,6 +11,14 @@
 .nav-link:hover {
     color: white;
     font-weight: bold;
+}
+
+.navbar-brand {
+    font-family: Lobster; 
+    color: white; 
+    font-size: 25pt; 
+    width: 16%; 
+    text-align: center;"
 }
 
 .main-container {
@@ -43,4 +56,41 @@
     align-items: center;
     padding-top: 20px;
     overflow-y: scroll;
+}
+
+.search-container > form {
+    width: 90%;
+    margin-right: 20px;
+}
+
+.search-container > svg {
+    color: black;
+}
+
+.card {
+    margin-bottom: 20px; 
+    width: 90%;
+}
+
+#num-of-members-filter > label {
+    margin-right: 10px;
+}
+
+#num-of-members-filter > select, #num-of-members-filter > input {
+    width: 25%; 
+    margin-right: 10px;
+}
+
+#num-of-members-filter, #club-types-filter {
+    margin-left: 20px;
+}
+
+.card_body {
+    color: grey;
+}
+
+.post-profile-picture {
+    border-radius: 50%; 
+    border: 1px solid black; 
+    margin-right: 20px;
 }

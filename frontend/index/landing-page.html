@@ -10,129 +10,125 @@
     </head>
     <body>
         <div class="logo-container">
-            <h1 style="font-family: Lobster; font-size: 65pt; font-weight: bold;">ClubConnect</h1>
+            <h1>ClubConnect</h1>
         </div>
         <div class="main-container">
             <div class="login-container">
-                <h2 style="font-weight: bold;">Login</h2>
+                <h2 class="container-header">Login</h2>
                 <br>
-                <form style="width: 50%">
+                <form>
                     <label for="email" class="form-label">Email:</label>
                     <input type="email" id="email" class="form-control" placeholder="Enter email...">
                     <br>
                     <label for="password" class="form-label">Password:</label>
                     <input type="password" id="password" class="form-control" placeholder="Enter password...">
                     <br>
-                    <div style="text-align: center;">
+                    <div id="login-btn-container">
                         <button type="button" class="btn btn-primary" id="login-btn">Log In</button>
                     </div>
                 </form>
             </div>
             <div class="signup-container">
-                <h2 style="font-weight: bold;">Signup</h2>
+                <h2 class="container-header">Signup</h2>
                 <br>
                 <br>
-                <div style="text-align: center;">
-                    <button type="button" class="btn btn-primary" id="student-signup-btn" data-toggle="modal" data-target="#student-signup-modal">Sign Up as Student</button>
-                    <div id="student-signup-modal" class="modal fade" role="dialog">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h3 class="modal-title">Student Signup</h3>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body" style="text-align: left;">
-                                    <form>
-                                        <div class="form-row">
-                                            <div class="col-md-6">
-                                                <label for="student-first-name" class="form-label">First Name:</label>
-                                                <input type="text" id="student-first-name" class="form-control" placeholder="Enter first name..." />
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="student-last-name">Last Name:</label>
-                                                <input type="text" id="student-last-name" class="form-control" placeholder="Enter last name..." />
-                                            </div>
+                <button type="button" class="btn btn-primary" id="student-signup-btn" data-toggle="modal" data-target="#student-signup-modal">Sign Up as Student</button>
+                <div id="student-signup-modal" class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Student Signup</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <label for="student-first-name" class="form-label">First Name:</label>
+                                            <input type="text" id="student-first-name" class="form-control" placeholder="Enter first name..." />
                                         </div>
-                                        <br>
-                                        <div class="form-row">
-                                            <div class="col-md-6">
-                                                <label for="student-email" class="form-label">Student Email:</label>
-                                                <input type="email" id="student-email" class="form-control" placeholder="Enter email..." />
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="student-username">Username:</label>
-                                                <input type="text" id="student-username" class="form-control" placeholder="Enter username..." />
-                                            </div>
+                                        <div class="col-md-6">
+                                            <label for="student-last-name">Last Name:</label>
+                                            <input type="text" id="student-last-name" class="form-control" placeholder="Enter last name..." />
                                         </div>
-                                        <br>
-                                        <div class="form-row">
-                                            <div class="col-md-6">
-                                                <label for="student-password" class="form-label">Password:</label>
-                                                <input type="password" id="student-password" class="form-control" placeholder="Enter password..." />
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="student-confirm-password">Confirm Password:</label>
-                                                <input type="password" id="student-confirm-password" class="form-control" placeholder="Confirm password..." />
-                                            </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <label for="student-email" class="form-label">Student Email:</label>
+                                            <input type="email" id="student-email" class="form-control" placeholder="Enter email..." />
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer" style="display: flex; justify-content: center;">
-                                    <button id="modal-signup-btn" class="btn btn-primary">Sign Up</button>
-                                </div>
+                                        <div class="col-md-6">
+                                            <label for="student-username">Username:</label>
+                                            <input type="text" id="student-username" class="form-control" placeholder="Enter username..." />
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <label for="student-password" class="form-label">Password:</label>
+                                            <input type="password" id="student-password" class="form-control" placeholder="Enter password..." />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="student-confirm-password">Confirm Password:</label>
+                                            <input type="password" id="student-confirm-password" class="form-control" placeholder="Confirm password..." />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="modal-signup-btn" class="btn btn-primary">Sign Up</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <br>
-                <div style="text-align: center;">
-                    <button type="button" class="btn btn-primary" id="club-signup-btn" data-toggle="modal" data-target="#club-signup-modal">Sign Up as Club</button>
-                    <div id="club-signup-modal" class="modal fade" role="dialog">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h3 class="modal-title">Club Signup</h3>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body" style="text-align: left;">
-                                    <form>
-                                        <div class="form-row">
-                                            <div class="col-md-6">
-                                                <label for="club-name" class="form-label">Club Name:</label>
-                                                <input type="text" id="club-name" class="form-control" placeholder="Enter club name..." />
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="club-type">Club Type:</label>
-                                                <input type="text" id="club-type" class="form-control" placeholder="Enter club type..." />
-                                            </div>
+                <button type="button" class="btn btn-primary" id="club-signup-btn" data-toggle="modal" data-target="#club-signup-modal">Sign Up as Club</button>
+                <div id="club-signup-modal" class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Club Signup</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <label for="club-name" class="form-label">Club Name:</label>
+                                            <input type="text" id="club-name" class="form-control" placeholder="Enter club name..." />
                                         </div>
-                                        <br>
-                                        <div class="form-row">
-                                            <div class="col-md-6">
-                                                <label for="club-email" class="form-label">Club Email:</label>
-                                                <input type="email" id="club-email" class="form-control" placeholder="Enter email..." />
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="club-username">Username:</label>
-                                                <input type="text" id="club-username" class="form-control" placeholder="Enter username..." />
-                                            </div>
+                                        <div class="col-md-6">
+                                            <label for="club-type">Club Type:</label>
+                                            <input type="text" id="club-type" class="form-control" placeholder="Enter club type..." />
                                         </div>
-                                        <br>
-                                        <div class="form-row">
-                                            <div class="col-md-6">
-                                                <label for="club-password" class="form-label">Password:</label>
-                                                <input type="password" id="club-password" class="form-control" placeholder="Enter password..." />
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="club-confirm-password">Confirm Password:</label>
-                                                <input type="password" id="club-confirm-password" class="form-control" placeholder="Confirm password..." />
-                                            </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <label for="club-email" class="form-label">Club Email:</label>
+                                            <input type="email" id="club-email" class="form-control" placeholder="Enter email..." />
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer" style="display: flex; justify-content: center;">
-                                    <button id="modal-signup-btn" class="btn btn-primary">Sign Up</button>
-                                </div>
+                                        <div class="col-md-6">
+                                            <label for="club-username">Username:</label>
+                                            <input type="text" id="club-username" class="form-control" placeholder="Enter username..." />
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <label for="club-password" class="form-label">Password:</label>
+                                            <input type="password" id="club-password" class="form-control" placeholder="Enter password..." />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="club-confirm-password">Confirm Password:</label>
+                                            <input type="password" id="club-confirm-password" class="form-control" placeholder="Confirm password..." />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="modal-signup-btn" class="btn btn-primary">Sign Up</button>
                             </div>
                         </div>
                     </div>

@@ -1,3 +1,16 @@
+.navbar {
+    background-color: green; 
+    height: 10vh;
+}
+
+.navbar-brand {
+    font-family: Lobster;
+    color: white;
+    font-size: 25pt; 
+    width: 16%; 
+    text-align: center;
+}
+
 .main-container {
     width: 100vw;
     height: 90vh;
@@ -97,10 +110,33 @@
     width: 200px;
 }
 
+#like-club-btn {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+}
+
 #add-friends-btn:hover, #join-club-btn:hover, #remove-member-btn:hover, #like-club-btn:hover {
     background-color: green;
     color: white;
     font-weight: bold;
+}
+
+#search {
+    margin-right: 20px;
+}
+
+#profile-picture {
+    border-radius: 50%; 
+    border: 2px solid black;
+}
+
+#profile-bio {
+    color: grey;
+}
+
+#sidebar-header {
+    text-align: center;
 }
 
 .nav-link {
@@ -111,4 +147,23 @@
 .nav-link:hover {
     color: white;
     font-weight: bold;
+}
+
+form > .bi {
+    color: white;
+}
+
+hr {
+    width: 75%;
+}
+
+.card {
+    margin-bottom: 20px; 
+    width: 90%;
+}
+
+.post-profile-picture {
+    border-radius: 50%; 
+    border: 1px solid black; 
+    margin-right: 20px;
 }

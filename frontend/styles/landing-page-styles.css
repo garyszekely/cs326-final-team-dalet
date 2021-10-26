@@ -46,6 +46,10 @@
     align-items: center;
 }
 
+.container-header {
+    font-weight: bold;
+}
+
 #login-btn, #student-signup-btn, #club-signup-btn, #modal-signup-btn {
     color: green;
     background-color: transparent;
@@ -56,5 +60,28 @@
 #login-btn:hover, #student-signup-btn:hover, #club-signup-btn:hover, #modal-signup-btn:hover {
     color: #F0F2F5;
     background-color: green;
+    font-weight: bold;
+}
+
+.login-container > form {
+    width: 50%;
+}
+
+#login-btn-container {
+    text-align: center;
+}
+
+.modal-body {
+    text-align: left;
+}
+
+.modal-footer {
+    display: flex; 
+    justify-content: center;
+}
+
+.logo-container > h1 {
+    font-family: Lobster; 
+    font-size: 65pt; 
     font-weight: bold;
 }
