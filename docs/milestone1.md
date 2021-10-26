@@ -38,6 +38,7 @@
 
   ### Student Homepage
   ![Club Signup Wireframes Image](wireframes/StudentHomePageWireframes.png "Club Signup Wireframes")
+  Ultimately, we hope to have the students' schedules added dynamically in the bottom rectangle.
 
   ### Club Homepage
   ![Club Signup Wireframes Image](wireframes/ClubHomePageWireframes.png "Club Signup Wireframes")
