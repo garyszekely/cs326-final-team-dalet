@@ -85,12 +85,16 @@
   The Club Signup modal with a signup form. We added a "X" and a "Sign Up" button for the user's navigation.
 
   ### Student Homepage
-
+  ![Club Signup Image](html-and-css/StudentHomePage.png "Student Homepage")
+  
   ### Club Homepage
+  ![Club Signup Image](html-and-css/ClubHomePage.png "Club Homepage")
 
   ### Student Personal Profile Page
+  ![Club Signup Image](html-and-css/StudentPersonalPage.png "Student Personal Page")
 
   ### Club Personal Profile Page
+  ![Club Signup Image](html-and-css/ClubPersonalPage.png "Club Personal Page")
 
   ### Student Viewing Another Student's Profile Page
   ![Student Viewing Another Student's Profile Page Image](html-and-css/StudentToStudentProfilePage.png "Student Viewing Another Student's Profile Page")
@@ -116,8 +120,9 @@
   ### Gary Szekely
   - Landing Page
   - Landing Page Signup Modals
-  - Profile Pages
-  - Find Clubs Page
+  - Profile Interaction Pages
+  - Find Clubs HTML
   ### Dang Le Nguyen
-  - Home Page
+  - Home Pages
   - Personal Profile Pages
+  - Find Club Wireframe
