@@ -50,14 +50,14 @@
     font-weight: bold;
 }
 
-#login-btn, #student-signup-btn, #club-signup-btn, #modal-signup-btn {
+#login-btn, #student-signup-btn, #club-signup-btn, #modal-student-signup-btn, #modal-club-signup-btn {
     color: green;
     background-color: transparent;
     border-color: green;
     width: 200px;
 }
 
-#login-btn:hover, #student-signup-btn:hover, #club-signup-btn:hover, #modal-signup-btn:hover {
+#login-btn:hover, #student-signup-btn:hover, #club-signup-btn:hover, #modal-student-signup-btn:hover, #modal-club-signup-btn:hover {
     color: #F0F2F5;
     background-color: green;
     font-weight: bold;

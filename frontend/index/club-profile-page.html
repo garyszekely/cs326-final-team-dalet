@@ -13,13 +13,13 @@
             <h1 class="navbar-brand">ClubConnect</h1>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="/index/student-home-page.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" href="/index/student-personal-page.html">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Find Clubs</a>
+                    <a class="nav-link" href="/index/find-clubs.html">Find Clubs</a>
                 </li>
             </ul>
             <form class="form-inline">
@@ -33,56 +33,32 @@
             <div class="profile-container">
                 <div class="profile-header-container">
                     <div class="profile-picture-container">
-                        <img width="150px" height="150x" id="profile-picture" src="default.jpg" />
+                        <img width="150px" height="150x" id="profile-picture" src="images/default.jpg" />
                     </div>
                     <div class="name-bio-container">
-                        <h1>ClubName</h1>
-                        <p id="profile-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.</p>
+                        <h1 id="club-name"></h1>
+                        <p id="profile-bio"></p>
                     </div>
                 </div>
                 <div class="profile-main-container">
                     <div class="profile-sidebar-container">
                         <h4>Total Members</h4>
-                        <h5>2</h5>
+                        <h5 id="total-members"></h5>
                         <hr>
                         <h4>Total Posts</h4>
-                        <h5>2</h5>
+                        <h5 id="total-posts"></h5>
                         <hr>
                         <h4>Total Likes</h4>
-                        <h5>200</h5>
+                        <h5 id="total-likes"></h5>
                         <hr>
                         <h4>Created</h4>
-                        <h5>Oct 2021</h5>
+                        <h5 id="created"></h5>
                         <hr>
                         <h4>Joined</h4>
-                        <h5>Oct 2021</h5>
+                        <h5 id="joined"></h5>
                     </div>
-                    <div class="feed-container">
+                    <div id="posts" class="feed-container">
                         <br>
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <img width="50px" height="50px" class="post-profile-picture" src="default.jpg" />
-                                    ClubName
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.</p>
-                            </div>
-                            <div class="card-footer text-muted">October 21, 2021 at 10:03 AM</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <img width="50px" height="50px" class="post-profile-picture" src="default.jpg" />
-                                    ClubName
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.</p>
-                            </div>
-                            <div class="card-footer text-muted">October 20, 2021 at 7:54 PM</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -104,9 +80,7 @@
                 <div class="clubs-container">
                     <h3 id="sidebar-header">Members</h3>
                     <hr>
-                    <ul>
-                        <li>FirstName LastName, <b>President</b></li>
-                        <li>FirstName LastName, <b>Member</b></li>
+                    <ul id="members">
                     </ul>
                 </div>
             </div>
@@ -114,5 +88,6 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="../clubProfilePage.js"></script>
     </body>
 </html>

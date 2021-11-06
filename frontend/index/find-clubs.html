@@ -6,16 +6,17 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
         <link rel="stylesheet" href="../styles/find-clubs-styles.css">
+        <title>Find Clubs</title>
     </head>
     <body>
         <nav class="navbar navbar-expand">
             <h1 class="navbar-brand">ClubConnect</h1>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="/index/student-home-page.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" href="/index/student-personal-page.html">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Find Clubs</a>
@@ -40,20 +41,7 @@
                             <input class="form-check-input" type="checkbox" id="filter-club-types">
                             <label class="form-check-label" for="filter-club-types">Filter by Club Type</label>
                         </div>
-                        <div id="club-types-filter" class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="clubType">
-                                <label class="form-check-label" for="clubType">ClubType</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="clubType">
-                                <label class="form-check-label" for="clubType">ClubType</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="clubType">
-                                <label class="form-check-label" for="clubType">ClubType</label>
-                            </div>
-                        </div>
+                        <div id="club-types-filter" class="form-group"></div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="filter-num-of-members">
                             <label class="form-check-label" for="filter-num-of-members">Filter by Number of Members</label>
@@ -70,40 +58,13 @@
                     </form>
                 </div>
             </div>
-            <div class="clubs-container">
-                <div class="card">
-                    <div class="card-header">
-                        <img width="50px" height="50px" class="post-profile-picture" src="default.jpg" />
-                        ClubName
-                    </div>
-                    <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.</div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <img width="50px" height="50px" class="post-profile-picture" src="default.jpg" />
-                        ClubName
-                    </div>
-                    <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.</div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <img width="50px" height="50px" class="post-profile-picture" src="default.jpg" />
-                        ClubName
-                    </div>
-                    <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.</div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <img width="50px" height="50px" class="post-profile-picture" src="default.jpg" />
-                        ClubName
-                    </div>
-                    <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.</div>
-                </div>
+            <div id="clubs" class="clubs-container">
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="../findClubs.js"></script>
         <script>
             document.getElementById('club-types-filter').style.display = 'none';
             document.getElementById('num-of-members-filter').style.display = 'none';
