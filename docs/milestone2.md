@@ -12,7 +12,7 @@ POST
 Body: firstName, lastName, email, username, password  
 Creates a new student user from the passed in information
 
-- /student/friend/new  
+- /student/friend/add  
 POST
 Body: currUser, otherUser
 Adds each other to the other's friend list given the names of the two users.
@@ -77,3 +77,5 @@ URL:
   - Find Clubs Scripts
   - APIs associated with above scripts
   ### Dang Le Nguyen
+  - database.js
+  - parts of server.js
