@@ -68,7 +68,26 @@ app.post('/club/member/delete', (req, res) => {
 	res.end;
 });
 
-app.get('/club/like/add', (req, res) => {
+app.post('/club/like/update', (req, res) => {
+	utils.update_like(req, res);
+	res.sendStatus(200);
+	res.end;
+});
+
+app.get('/club/like/get', (req, res) => {
+	utils.get_like(req, res);
+	res.sendStatus(200);
+	res.end;
+});
+
+app.post('/club/info/update', (req, res) => {
+	utils.update_club_info(req, res);
+	res.sendStatus(200);
+	res.end;
+});
+
+app.post('/club/description/update', (req, res) => {
+	utils.update_club_description(req, res);
 	res.sendStatus(200);
 	res.end;
 });

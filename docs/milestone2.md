@@ -49,6 +49,18 @@ Removes the specified member to the specified club
 POST
 Adds a like to the club
 
+- /club/like/get
+GET
+returns the number of likes
+
+- /club/info/update
+POST
+Updates club info
+
+- /club/description/update
+POST
+Updates club description
+
 - /student/info  
 GET
 Retrieves the students information which contains name, bio, totalPosts, totalClubs, posts, friends, joined, and clubs

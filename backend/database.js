@@ -115,3 +115,81 @@ function redirect(req, res){
 		console.err(err);
 	} else res.end();
 }
+
+function update_like(req, res){
+	club_base = JSON.parse(readFileSync("./storage/clubs.json"));
+	let body = '';
+    req.on('data', data => body += data);
+    req.on('end', () => {
+		const data = JSON.parse(body);
+		for(const c of club_base){
+			if (c.id === data.club_id){
+				c.likes += 1;
+			}
+		}
+        writeFile("./storage/clubs.json", JSON.stringify(club_base), err => {
+            if (err) {
+                console.err(err);
+            } else res.end();
+        });
+    });
+}
+
+function get_like(req, res){
+	club_base = JSON.parse(readFileSync("./storage/clubs.json"));
+	let body = '';
+    req.on('data', data => body += data);
+    req.on('end', () => {
+		const data = JSON.parse(body);
+		for(const c of club_base){
+			if (c.id === data.club_id){
+				res.send(c.likes);
+			}
+		}
+        writeFile("./storage/clubs.json", JSON.stringify(club_base), err => {
+            if (err) {
+                console.err(err);
+            } else res.end();
+        });
+    });
+}
+
+function update_club_description(req, res){
+	club_base = JSON.parse(readFileSync("./storage/clubs.json"));
+	let body = '';
+    req.on('data', data => body += data);
+    req.on('end', () => {
+		const data = JSON.parse(body);
+		for(const c of club_base){
+			if (c.id === data.club_id){
+				c.description = data.description;
+			}
+		}
+        writeFile("./storage/clubs.json", JSON.stringify(club_base), err => {
+            if (err) {
+                console.err(err);
+            } else res.end();
+        });
+    });
+}
+
+function update_club_info(req, res){
+	club_base = JSON.parse(readFileSync("./storage/clubs.json"));
+	let body = '';
+    req.on('data', data => body += data);
+    req.on('end', () => {
+		const data = JSON.parse(body);
+		for(const c of club_base){
+			if (c.id === data.club_id){
+				c.email = data.email;
+				c.contact = data.contact;
+				c.leaders = c.leaders;
+			}
+		}
+        writeFile("./storage/clubs.json", JSON.stringify(club_base), err => {
+            if (err) {
+                console.err(err);
+            } else res.end();
+        });
+    });
+}
