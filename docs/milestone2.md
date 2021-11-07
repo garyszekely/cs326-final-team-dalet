@@ -83,7 +83,7 @@ No Input
 The above landing page utilizes 3 APIS to function properly. The first is /login which is a READ operation since we are reading the passed in information to verify the user. The other 2 are /student/new and /club/new (depending on what the user chooses) are CREATE operations since they are creating new users with the passed in information.
 
 ### Club Personal Page  
-![Club Personal Page Image](html-and-css/ClubToStudentProfilePage.png "Club Personal Page")  
+![Club Personal Page Image](html-and-css/ClubPersonalPage.png "Club Personal Page")  
 The READ operation /club/info can retrieves some information to be shown to the club account.
 
 ### Club Viewing Member's Profile Page
