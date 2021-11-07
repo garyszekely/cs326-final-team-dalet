@@ -97,7 +97,7 @@ URL:
 ## Labor Division
   ### Gary Szekely
   - Landing Page Script
-  - Profile Interaction Pages Scripts
+  - Profile Interaction Pages Scripts (Club, Club to Member, and Student to Student)
   - Find Clubs Scripts
   - APIs associated with above scripts
   ### Dang Le Nguyen

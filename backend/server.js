@@ -1,7 +1,5 @@
 const express = require('express');
-import * as utils from "database.js";
 const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
 const app = express();
 app.use(express.static('../frontend'));
 
