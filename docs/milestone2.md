@@ -23,7 +23,7 @@ Body: currUserid, otherUserid
 Adds each other to the other's friend list given the ids of the two users.
 
 - /club/new  
-POST
+POST  
 Body: clubName, clubType, email, username, password  
 Creates a new club user from the passed in information
 
@@ -65,11 +65,11 @@ Body: description
 Updates club description
 
 - /student/info  
-GET
+GET  
 Retrieves the students information which contains name, bio, totalPosts, totalClubs, posts,friends, joined, and clubs
 
 - /club/info  
-GET
+GET  
 Retrieves the clubs information which contains clubName, clubBio, totalPosts, totalMembers, totalLikes, joined, created, posts, and members
 
 ## Part 1: Backend Skeleton Code
