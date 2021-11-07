@@ -7,8 +7,8 @@ POST
 Body: email, password  
 "Login" the user by verifying that the email is associated with a user and checks if the password is correct.
 
-- /page
-Post
+- /page 
+POST  
 Body: String of html file
 Redirects to the page indicated.
 
@@ -47,6 +47,7 @@ Removes the specified member to the specified club
 
 - /club/like/update
 POST
+Body: N/A
 Adds a like to the club
 
 - /club/like/get
@@ -55,10 +56,12 @@ returns the number of likes
 
 - /club/info/update
 POST
+Body: email, contact, leaders
 Updates club info
 
 - /club/description/update
 POST
+Body: description
 Updates club description
 
 - /student/info  
