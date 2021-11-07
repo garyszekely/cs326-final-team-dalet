@@ -23,7 +23,7 @@ Body: currUserid, otherUserid
 Adds each other to the other's friend list given the ids of the two users.
 
 - /club/new  
-POST  
+POST
 Body: clubName, clubType, email, username, password  
 Creates a new club user from the passed in information
 
@@ -31,7 +31,7 @@ Creates a new club user from the passed in information
 GET  
 Returns an array of the types of clubs
 
-- /clubs
+- /clubs  
 GET  
 Returns an array of club objects with fields clubName and clubDescription
 
