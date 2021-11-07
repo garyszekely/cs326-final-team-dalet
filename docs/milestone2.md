@@ -92,7 +92,7 @@ The above club view of their member's profile pages utilizes an example of a DEL
 
 ## Part 3: Deployment
 
-URL: 
+URL: https://clubconnect2021.herokuapp.com/
 
 ## Labor Division
   ### Gary Szekely
