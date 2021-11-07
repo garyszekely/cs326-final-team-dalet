@@ -1,27 +1,38 @@
-const express = require('express')
-
+const express = require('express');
+import * as utils from "database.js";
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 const app = express();
 app.use(express.static('../frontend'));
 
-app.post('/login', (req, res) => {
+app.get('/login', (req, res) => {
+	res.redirect('/index/login.html');
 	res.sendStatus(200);
 	res.end;
-})
+});
 
 app.post('/student/new', (req, res) => {
-	res.sendStatus(200)
-	res.end;
-})
-
-app.post('/student/friend/new', (req, res) => {
+	utils.add_new_student(req, res);
 	res.sendStatus(200);
 	res.end;
-})
+});
+
+app.post('/student/friend/add', (req, res) => {
+	utils.add_friend(req, res);
+	res.sendStatus(200);
+	res.end;
+});
+
+app.post('/student/friend/delete', (req, res) => {
+	utils.delete_friend(req, res);
+	res.sendStatus(200);
+	res.end;
+});
 
 app.post('/club/new', (req, res) => {
 	res.sendStatus(200)
 	res.end;
-})
+});
 
 app.get('/club/types', (req, res) => {
 	res.send([
@@ -30,7 +41,7 @@ app.get('/club/types', (req, res) => {
 		"Athletic"
 	])
 	res.end;
-})
+});
 
 app.get('/clubs', (req, res) => {
 	res.send([
@@ -39,22 +50,22 @@ app.get('/clubs', (req, res) => {
 			clubDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.'
 		}
 	])
-})
+});
 
 app.post('/club/member/new', (req, res) => {
 	res.sendStatus(200);
 	res.end;
-})
+});
 
 app.post('/club/member/delete', (req, res) => {
 	res.sendStatus(200);
 	res.end;
-})
+});
 
 app.get('/club/like/new', (req, res) => {
 	res.sendStatus(200);
 	res.end;
-})
+});
 
 app.get('/student/info', (req, res) => {
 	res.send(JSON.stringify({
@@ -83,7 +94,7 @@ app.get('/student/info', (req, res) => {
 		]
 	}))
 	res.end;
-})
+});
 
 app.get('/club/info', (req, res) => {
 	res.send(JSON.stringify({
@@ -114,7 +125,7 @@ app.get('/club/info', (req, res) => {
 		],
 	}))
 	res.end;
-})
+});
 
 
 app.get('/user/view/club_id', (req, res) => {
