@@ -11,6 +11,12 @@ app.get('/login', (req, res) => {
 	res.end;
 });
 
+app.get('/page', (req, res) => {
+	utils.redirect(req, res);
+	res.sendStatus(200);
+	res.end;
+});
+
 app.post('/student/new', (req, res) => {
 	utils.add_new_student(req, res);
 	res.sendStatus(200);

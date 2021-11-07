@@ -102,3 +102,16 @@ function delete_friend(req, res){
         });
     });
 }
+
+function redirect(req, res){
+	let body = '';
+    req.on('data', data => body += data);
+    req.on('end', () => {
+		const data = JSON.parse(body);
+		res.redirect(data.page);
+	});
+
+	if (err) {
+		console.err(err);
+	} else res.end();
+}
