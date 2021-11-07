@@ -7,6 +7,11 @@ POST
 Body: email, password  
 "Login" the user by verifying that the email is associated with a user and checks if the password is correct.
 
+- /page
+Post
+Body: String of html file
+Redirects to the page indicated.
+
 - /student/new  
 POST
 Body: firstName, lastName, email, username, password  
@@ -30,7 +35,7 @@ Returns an array of the types of clubs
 GET
 Returns an array of club objects with fields clubName and clubDescription
 
-- /club/member/new  
+- /club/member/add  
 POST
 Body: memberName
 Adds the specified member to the specified club
@@ -40,8 +45,8 @@ POST
 Body: memberName
 Removes the specified member to the specified club
 
-- /club/like/new  
-GET
+- /club/like/update
+POST
 Adds a like to the club
 
 - /student/info  
@@ -60,11 +65,15 @@ No Input
 
 ### Landing Page
 ![Landing Page Image](html-and-css/LandingPage.png "Landing Page")
-The above landing page utilizes 3 APIS to function properly. The first is /login which is a READ operation since we are reading the passed in information to verify the user. The other 2 are /student/new and /club/new (depending on what the user chooses) are CREATE operations since they are creating new users with the passed in information
+The above landing page utilizes 3 APIS to function properly. The first is /login which is a READ operation since we are reading the passed in information to verify the user. The other 2 are /student/new and /club/new (depending on what the user chooses) are CREATE operations since they are creating new users with the passed in information.
 
 ### Club Viewing Member's Profile Page
 ![Club Viewing Member's Profile Page Image](html-and-css/ClubToStudentProfilePage.png "Club Viewing Member's Profile Page")
 The above club view of their member's profile pages utilizes an example of a DELETE operation when the user clicks "Remove Member" which updates the clubs members to remove that specified member. The interface also utilizes READ operations by reading all the information from /student/info to display on the page.
+
+### Club Home Page
+![Club Home Page](html-and-css/ClubHomePage2.png "Club Home Page")
+/club/like/update is an UPDATE operation that increase the like count.
 
 ## Part 3: Deployment
 

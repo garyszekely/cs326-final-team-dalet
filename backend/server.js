@@ -58,7 +58,7 @@ app.get('/clubs', (req, res) => {
 	])
 });
 
-app.post('/club/member/new', (req, res) => {
+app.post('/club/member/add', (req, res) => {
 	res.sendStatus(200);
 	res.end;
 });
@@ -68,7 +68,7 @@ app.post('/club/member/delete', (req, res) => {
 	res.end;
 });
 
-app.get('/club/like/new', (req, res) => {
+app.get('/club/like/add', (req, res) => {
 	res.sendStatus(200);
 	res.end;
 });
@@ -133,21 +133,5 @@ app.get('/club/info', (req, res) => {
 	res.end;
 });
 
-
-app.get('/user/view/club_id', (req, res) => {
-	res.end;
-});
-
-app.get('/club/view', (req, res) => {
-	res.end;
-});
-
-app.get('/user/comment/new?comment_id=', (req, res) => {
-	res.end;
-});
-
-app.get('/user/comment/delete?comment_id=', (req, res) => {
-	res.end;
-});
 
 app.listen(process.env.PORT || 3000);
