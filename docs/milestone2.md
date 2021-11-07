@@ -85,7 +85,7 @@ The above club view of their member's profile pages utilizes an example of a DEL
 
 ### Club Home Page
 ![Club Home Page](html-and-css/ClubHomePage2.png "Club Home Page")
-/club/like/update is an UPDATE operation that increase the like count.
+/club/like/update is an UPDATE operation that increase the like count. /club/info/update and /club/description/update are UPDATE operations that changes club info and club descriptions respectively.
 
 ## Part 3: Deployment
 
