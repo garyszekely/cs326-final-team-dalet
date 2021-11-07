@@ -3,13 +3,13 @@
 ## Part 0: Project API Planning
 
 - /login  
-POST  
+POST
 Body: email, password  
 "Login" the user by verifying that the email is associated with a user and checks if the password is correct.
 
-- /page 
-POST  
-Body: String of html file
+- /page  
+POST
+Body: String of html file  
 Redirects to the page indicated.
 
 - /student/new  
@@ -19,54 +19,54 @@ Creates a new student user from the passed in information
 
 - /student/friend/add  
 POST
-Body: currUser, otherUser
-Adds each other to the other's friend list given the names of the two users.
+Body: currUserid, otherUserid  
+Adds each other to the other's friend list given the ids of the two users.
 
 - /club/new  
 POST
-Body: clubName, clubType, email, username, password
+Body: clubName, clubType, email, username, password  
 Creates a new club user from the passed in information
 
 - /club/types  
-GET
+GET  
 Returns an array of the types of clubs
 
 - /clubs
-GET
+GET  
 Returns an array of club objects with fields clubName and clubDescription
 
 - /club/member/add  
 POST
-Body: memberName
+Body: memberName  
 Adds the specified member to the specified club
 
 - /club/member/delete  
 POST
-Body: memberName
+Body: memberName  
 Removes the specified member to the specified club
 
-- /club/like/update
+- /club/like/update  
 POST
-Body: N/A
+Body: N/A  
 Adds a like to the club
 
-- /club/like/get
-GET
+- /club/like/get  
+GET  
 returns the number of likes
 
-- /club/info/update
+- /club/info/update  
 POST
-Body: email, contact, leaders
+Body: email, contact, leaders  
 Updates club info
 
-- /club/description/update
+- /club/description/update  
 POST
-Body: description
+Body: description  
 Updates club description
 
 - /student/info  
 GET
-Retrieves the students information which contains name, bio, totalPosts, totalClubs, posts, friends, joined, and clubs
+Retrieves the students information which contains name, bio, totalPosts, totalClubs, posts,friends, joined, and clubs
 
 - /club/info  
 GET
