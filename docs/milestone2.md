@@ -52,7 +52,7 @@ Adds a like to the club
 
 - /club/like/get  
 GET  
-returns the number of likes
+retrieve the number of likes
 
 - /club/info/update  
 POST
@@ -82,12 +82,16 @@ No Input
 ![Landing Page Image](html-and-css/LandingPage.png "Landing Page")
 The above landing page utilizes 3 APIS to function properly. The first is /login which is a READ operation since we are reading the passed in information to verify the user. The other 2 are /student/new and /club/new (depending on what the user chooses) are CREATE operations since they are creating new users with the passed in information.
 
+### Club Personal Page  
+![Club Personal Page Image](html-and-css/ClubToStudentProfilePage.png "Club Personal Page")  
+The READ operation /club/info can retrieves some information to be shown to the club account.
+
 ### Club Viewing Member's Profile Page
 ![Club Viewing Member's Profile Page Image](html-and-css/ClubToStudentProfilePage.png "Club Viewing Member's Profile Page")
 The above club view of their member's profile pages utilizes an example of a DELETE operation when the user clicks "Remove Member" which updates the clubs members to remove that specified member. The interface also utilizes READ operations by reading all the information from /student/info to display on the page.
 
 ### Club Home Page
-![Club Home Page](html-and-css/ClubHomePage2.png "Club Home Page")
+![Club Home Page Image](html-and-css/ClubHomePage2.png "Club Home Page")
 /club/like/update is an UPDATE operation that increase the like count. /club/info/update and /club/description/update are UPDATE operations that changes club info and club descriptions respectively.
 
 ## Part 3: Deployment
