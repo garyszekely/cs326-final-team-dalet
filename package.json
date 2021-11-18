@@ -20,6 +20,10 @@
   },
   "homepage": "https://github.com/garyszekely/cs236-final-team-dalet#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "mongodb": "^4.2.0",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0"
   }
 }

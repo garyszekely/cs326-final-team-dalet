@@ -1,13 +1,110 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-app.use(express.static('../frontend'));
+'use strict';
 
-app.get('/login', (req, res) => {
-	res.redirect('/index/login.html');
-	res.sendStatus(200);
-	res.end;
+const express = require('express');
+const expressSession = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy
+const database = require('./database.js');
+
+const app = express();
+app.use(expressSession({
+	secret: 'SECRET',
+	resave: false,
+	saveUninitialized: false
+}));
+app.use(express.json());
+app.use(express.static(__dirname + '/public'));
+
+passport.use(new LocalStrategy(async (username, password, done) => {
+	if (await database.validateUser(username, password)) {
+		return done(null, username);
+	} else {
+		return done(null, false, {message: 'Incorrect username and/or password.'});
+	}
+}));
+
+app.get('/', (req, res) => {
+	res.sendFile('landing-page.html', {'root': __dirname + '/public/index/'});
 });
+
+app.get('/homepage', (req, res) => {
+	res.sendFile('', {'root': __dirname + '/public/index/'})
+});
+
+app.get('/personal-page', (req, res) => {
+	res.sendFile('', {'root': __dirname + '/public/index/'})
+});
+
+app.get('/profile-page', (req, res) => {
+	res.sendFile('', {'root': __dirname + '/public/index/'})
+});
+
+app.get('/find-clubs', (req, res) => {
+	res.sendFile('find-clubs.html', {'root': __dirname + '/public/index/'})
+});
+
+app.post('/login', async (req, res) => {
+	const username = req.body['username'];
+	const password = req.body['password'];
+
+	if (await database.validateUser(username, password)) {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(400);
+	}
+
+	res.end();
+});
+
+app.post('/create-user', async (req, res) => {
+	const username = req.body['username'];
+	const password = req.body['password'];
+	const type = req.body['type'];
+	const name = req.body['name'];
+	const email = req.body['email'];
+
+	if (await database.createUser(username, password, type, name, email)) {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(400);
+	}
+
+	res.end();
+});
+
+app.get('/read-user', async (req, res) => {
+	const username = req.body['username'];
+
+	const user = await database.readUser(username);
+	if (user != null) {
+		res.send(JSON.stringify(user));
+	} else {
+		res.sendStatus(400);
+	}
+
+	res.end();
+});
+
+app.post('/create-post', async (req, res) => {
+	const username = req.body['username'];
+	const text = req.body['text'];
+	const timestamp = req.body['timestamp'];
+
+	await database.createPost(username, text, timestamp);
+
+	res.end();
+});
+
+app.post('/update-post', async (req, res) => {
+	const username = req.body['username'];
+	
+	res.end();
+});
+
+app.post('/delete-post', async (req, res) => {
+	res.end();
+});
+
 
 app.get('/page', (req, res) => {
 	utils.redirect(req, res);
@@ -150,5 +247,4 @@ app.get('/club/info', (req, res) => {
 	res.end;
 });
 
-
-app.listen(process.env.PORT || 3000);
+app.listen(3000);
