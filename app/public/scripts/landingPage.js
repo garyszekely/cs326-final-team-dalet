@@ -26,78 +26,66 @@ document.getElementById('club-confirm-password').addEventListener('keyup', () =>
         clubConfirmPassword.style.backgroundColor = 'red';
         clubConfirmPassword.style.color = 'black';
     }
-})
+});
 
-async function onLogin(event) {
+document.getElementById('student-signup').addEventListener('submit', async (event) => {
     event.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    const res = await fetch('/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: {
-            username: username,
-            password: password
-        }
-    });
-}
-
-async function onStudentSignup(event) {
-    event.preventDefault();
-
-    const username = document.getElementById('student-username').value;
-    const password = document.getElementById('student-password').value;
-    const type = 'student';
-    const name = document.getElementById('student-first-name').value + " " + document.getElementById('student-last-name').value;
+    
     const email = document.getElementById('student-email').value;
-    const studentConfirmPassword = document.getElementById('student-confirm-password').value;
+    const password = document.getElementById('student-password').value;
+    const name = document.getElementById('student-name').value;
+    const confirmPassword = document.getElementById('student-confirm-password').value;
 
-    if (password == studentConfirmPassword) {
-        const res = await fetch('/signup', {
+    if (password === confirmPassword) {
+        const res = await fetch('/create-student', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                'username': username,
+                'email': email,
                 'password': password,
-                'type': type,
                 'name': name,
-                'email': email
             })
         });
-    }
-}
 
-async function onClubSignup(event) {
+        if (res.ok) {
+            $('#student-signup-modal').modal('hide');
+            alert('Signup successful! Please log in to continue.')
+        } else {
+            alert('Signup failed! Please try again...')
+        }
+    }
+});
+
+document.getElementById('club-signup').addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const username = document.getElementById('club-username').value;
-    const password = document.getElementById('club-password').value;
-    const type = 'club';
-    const name = document.getElementById('club-name').value;
-    const clubType = document.getElementById('club-type').value;
     const email = document.getElementById('club-email').value;
-    const clubConfirmPassword = document.getElementById('club-confirm-password').value;
+    const password = document.getElementById('club-password').value;
+    const name = document.getElementById('club-name').value;
+    const type = document.getElementById('club-type').value;
+    const confirmPassword = document.getElementById('club-confirm-password').value;
 
-    if (password == clubConfirmPassword) {
-        const res = await fetch('/club-signup', {
+    if (password === confirmPassword) {
+        const res = await fetch('/create-club', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                'username': username,
+                'email': email,
                 'password': password,
-                'type': type,
                 'name': name,
-                'clubType': clubType,
-                'email': email
+                'type': type
             })
         });
+
+        if (res.ok) {
+            $('#club-signup-modal').modal('hide');
+            alert('Signup successful! Please log in to continue.');
+        } else {
+            alert('Signup failed! Please try again...')
+        }
     }
-}
+});

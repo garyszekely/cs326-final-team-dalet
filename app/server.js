@@ -1,87 +1,162 @@
 'use strict';
 
-const express = require('express');
-const expressSession = require('express-session');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy
-const database = require('./database.js');
+import express from 'express';
+import expressSession from 'express-session';
+import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local';
+import { authenticateStudent, authenticateClub, createStudent, readClub, createClub, readStudent } from './database.js';
 
 const app = express();
+
+passport.use(new LocalStrategy({
+	usernameField: 'email',
+	passReqToCallback: true
+}, async (req, email, password, done) => {
+	const type = req.body['type'];
+
+	if (type === 'student') {
+		if (await authenticateStudent(email, password)) {
+			return done(null, {
+				'email': email,
+				'type': 'student'
+			});
+		}
+	} else if (type === 'club') {
+		if (await authenticateClub(email, password)) {
+			return done(null, {
+				'email': email,
+				'type': 'club'
+			});
+		}
+	} else {
+	}
+	return done(null, false, {message: 'Incorrect email and/or password.'});
+}));
+
 app.use(expressSession({
 	secret: 'SECRET',
 	resave: false,
 	saveUninitialized: false
 }));
 app.use(express.json());
-app.use(express.static(__dirname + '/public'));
+app.use(express.urlencoded({extended: true}));
+app.use(express.static('app/public'));
+app.use(passport.initialize());
+app.use(passport.session());
 
-passport.use(new LocalStrategy(async (username, password, done) => {
-	if (await database.validateUser(username, password)) {
-		return done(null, username);
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+passport.deserializeUser((id, done) => {
+    done(null, id);
+});
+
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated()) {
+		next();
 	} else {
-		return done(null, false, {message: 'Incorrect username and/or password.'});
+		res.redirect('/');
 	}
-}));
+}
 
 app.get('/', (req, res) => {
-	res.sendFile('landing-page.html', {'root': __dirname + '/public/index/'});
+	res.sendFile('landing-page.html', {root: 'app/public/index/'});
 });
 
-app.get('/homepage', (req, res) => {
-	res.sendFile('', {'root': __dirname + '/public/index/'})
-});
+app.get('/homepage', isLoggedIn, (req, res) => {
+	const userType = req.user['type'];
 
-app.get('/personal-page', (req, res) => {
-	res.sendFile('', {'root': __dirname + '/public/index/'})
-});
-
-app.get('/profile-page', (req, res) => {
-	res.sendFile('', {'root': __dirname + '/public/index/'})
-});
-
-app.get('/find-clubs', (req, res) => {
-	res.sendFile('find-clubs.html', {'root': __dirname + '/public/index/'})
-});
-
-app.post('/login', async (req, res) => {
-	const username = req.body['username'];
-	const password = req.body['password'];
-
-	if (await database.validateUser(username, password)) {
-		res.sendStatus(200);
-	} else {
-		res.sendStatus(400);
+	if (userType === 'student') {
+		res.sendFile('student-homepage.html', {root: 'app/public/index/'});
+	} else if (userType === 'club') {
+		res.sendFile('club-homepage.html', {root: 'app/public/index/'});
 	}
-
-	res.end();
 });
 
-app.post('/create-user', async (req, res) => {
-	const username = req.body['username'];
-	const password = req.body['password'];
-	const type = req.body['type'];
-	const name = req.body['name'];
+app.get('/personal-page', isLoggedIn, async (req, res) => {
+	if (req.user['type'] === 'student') {
+		res.sendFile('student-personal-page.html', {root: 'app/public/index/'});
+	} else if (req.user['type'] === 'club') {
+		res.sendFile('club-personal-page.html', {root: 'app/public/index/'});
+	}
+});
+
+app.get('/profile-page', isLoggedIn, (req, res) => {
+	const userType = req.user['type'];
+	const profileType = req.query['type'];
+	if (userType === 'student') {
+		if (profileType === 'student') {
+			res.sendFile('student-student-profile-page.html', {root: 'app/public/index/'})
+		} else if (profileType === 'student') {
+			res.sendFile('student-club-profile-page.html', {root: 'app/public/index/'})
+		}
+	} else if (userType === 'club') {
+		if (profileType === 'student') {
+			res.sendFile('club-student-profile-page.html', {root: 'app/public/index/'})
+		}
+	}
+});
+
+app.get('/find-clubs', isLoggedIn, (req, res) => {
+	if (req.user['type'] === 'student') {
+		res.sendFile('find-clubs.html', {root: 'app/public/index/'})
+	} else {
+		res.redirect('/homepage');
+	}
+});
+
+app.post('/login', passport.authenticate('local', {
+	successRedirect: '/homepage',
+	failureRedirect: '/',
+}));
+
+app.post('/create-student', async (req, res) => {
 	const email = req.body['email'];
+	const password = req.body['password'];
+	const name = req.body['name'];
 
-	if (await database.createUser(username, password, type, name, email)) {
+	if (await createStudent(email, password, name)) {
 		res.sendStatus(200);
 	} else {
 		res.sendStatus(400);
 	}
-
 	res.end();
 });
 
-app.get('/read-user', async (req, res) => {
-	const username = req.body['username'];
+app.get('/read-student', async (req, res) => {
+	const email = req.query['email'];
+	const student = await readStudent(email);
 
-	const user = await database.readUser(username);
-	if (user != null) {
-		res.send(JSON.stringify(user));
+	if (student !== null) {
+		res.send(JSON.stringify(student))
 	} else {
 		res.sendStatus(400);
 	}
+	res.end();
+});
 
+app.post('/create-club', async (req, res) => {
+	const email = req.body['email'];
+	const password = req.body['password'];
+	const name = req.body['name'];
+
+	if (await createClub(email, password, name)) {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(400);
+	}
+	res.end();
+});
+
+app.get('/read-club', async (req, res) => {
+	const email = req.query['email'];
+	const club = await readClub(email);
+
+	if (club !== null) {
+		res.send(JSON.stringify(club))
+	} else {
+		res.sendStatus(400);
+	}
 	res.end();
 });
 

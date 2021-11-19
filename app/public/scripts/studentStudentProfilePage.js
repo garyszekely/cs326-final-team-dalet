@@ -1,8 +1,22 @@
-let otherUserName = ''
+let student;
 
-async function getStudentInfo() {
-    const res = await fetch('/student/info')
-    const data = await res.json();
+async function addFriend() {
+    const res = await fetch('/student/friend/new', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            currUser: student.name,
+            otherUser: otherUserName
+        })
+    });
+}
+
+window.addEventListener('load', async () => {
+    const profileEmail = localStorage.getItem('profileEmail');
+    const res = await fetch('/read-student?' + 'email=' + profileEmail);
+    student = await res.json();
     otherUserName = data.name;
     document.getElementById('name').innerHTML = data.name;
     document.getElementById('profile-bio').innerHTML = data.bio;
@@ -39,22 +53,6 @@ async function getStudentInfo() {
         cardElement.appendChild(cardFooterElement);
         document.getElementById('posts').appendChild(cardElement);
     }
-}
-
-async function addFriend() {
-    const res = await fetch('/student/friend/new', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            currUser: localStorage.getItem('studentName'),
-            otherUser: otherUserName
-        })
-    });
-}
-
-window.onload = () => {
-    getStudentInfo();
+    
     document.getElementById('add-friends-btn').addEventListener('click', addFriend);
-}
+});

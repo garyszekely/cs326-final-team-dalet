@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
-        <link rel="stylesheet" href="../styles/landing-page-styles.css">
+        <link rel="stylesheet" href="../styles/landing-page.css">
         <title>ClubConnect Landing Page</title>
     </head>
     <body>
@@ -17,11 +17,19 @@
                 <h2 class="container-header">Login</h2>
                 <br>
                 <form action="/login" method="post">
-                    <label for="username" class="form-label">Username:</label>
-                    <input type="text" id="username" class="form-control" placeholder="Enter username..." required>
+                    <label for="type" class="form-label">I am a(n):</label>
+                    <select name="type" class="form-control" required>
+                        <option disabled selected></option>
+                        <option value="student">Student</option>
+                        <option value="club">Club</option>
+                        <option value="admin>">Admin</option>
+                    </select>
+                    <br>
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" name="email" class="form-control" placeholder="Enter email..." required>
                     <br>
                     <label for="password" class="form-label">Password:</label>
-                    <input type="password" id="password" class="form-control" placeholder="Enter password..." required>
+                    <input type="password" name="password" class="form-control" placeholder="Enter password..." required>
                     <br>
                     <div id="login-btn-container">
                         <input type="submit" class="btn btn-primary" id="login-btn" value="Log In">
@@ -33,6 +41,9 @@
                 <br>
                 <br>
                 <button type="button" class="btn btn-primary" id="student-signup-btn" data-toggle="modal" data-target="#student-signup-modal">Sign Up as Student</button>
+                <br>
+                <br>
+                <button type="button" class="btn btn-primary" id="club-signup-btn" data-toggle="modal" data-target="#club-signup-modal">Sign Up as Club</button>
                 <div id="student-signup-modal" class="modal fade" role="dialog">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -41,26 +52,18 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
-                                <form id="student-signup" onsubmit="onStudentSignup(event)">
+                                <form id="student-signup">
                                     <div class="form-row">
-                                        <div class="col-md-6">
-                                            <label for="student-first-name" class="form-label">First Name:</label>
-                                            <input type="text" id="student-first-name" class="form-control" placeholder="Enter first name..." required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="student-last-name">Last Name:</label>
-                                            <input type="text" id="student-last-name" class="form-control" placeholder="Enter last name..." required>
+                                        <div class="col-md-12">
+                                            <label for="student-name" class="form-label">Name:</label>
+                                            <input type="text" id="student-name" class="form-control" placeholder="Enter name..." required>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="form-row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <label for="student-email" class="form-label">Student Email:</label>
                                             <input type="email" id="student-email" class="form-control" placeholder="Enter email..." required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="student-username">Username:</label>
-                                            <input type="text" id="student-username" class="form-control" placeholder="Enter username..." />
                                         </div>
                                     </div>
                                     <br>
@@ -82,8 +85,6 @@
                         </div>
                     </div>
                 </div>
-                <br>
-                <button type="button" class="btn btn-primary" id="club-signup-btn" data-toggle="modal" data-target="#club-signup-modal">Sign Up as Club</button>
                 <div id="club-signup-modal" class="modal fade" role="dialog">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -92,26 +93,25 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
-                                <form id="club-signup" onsubmit="onClubSignup(event)">
+                                <form id="club-signup">
                                     <div class="form-row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <label for="club-name" class="form-label">Club Name:</label>
                                             <input type="text" id="club-name" class="form-control" placeholder="Enter club name..." required>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label for="club-type">Club Type:</label>
+                                    </div>
+                                    <br>
+                                    <div class="form-row">
+                                        <div class="col-md-12">
+                                            <label for="club-type">Type:</label>
                                             <input type="text" id="club-type" class="form-control" placeholder="Enter club type..." required>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="form-row">
-                                        <div class="col-md-6">
-                                            <label for="club-email" class="form-label">Club Email:</label>
+                                        <div class="col-md-12">
+                                            <label for="club-email" class="form-label">Email:</label>
                                             <input type="email" id="club-email" class="form-control" placeholder="Enter email..." required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="club-username">Username:</label>
-                                            <input type="text" id="club-username" class="form-control" placeholder="Enter username..." required>
                                         </div>
                                     </div>
                                     <br>
@@ -139,6 +139,6 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="../landingPage.js"></script>
+        <script src="../scripts/landingPage.js"></script>
     </body>
 </html>

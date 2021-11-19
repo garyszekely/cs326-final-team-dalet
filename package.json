@@ -1,5 +1,6 @@
 {
   "name": "cs326-final-team-dalet",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

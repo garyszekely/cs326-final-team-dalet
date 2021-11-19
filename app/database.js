@@ -1,102 +1,164 @@
 'use strict';
 
-const MongoClient = require('mongodb').MongoClient;
+import { MongoClient } from 'mongodb';
+
 const uri = 'mongodb+srv://admin:pwd@teamdaletcluster.3ramk.mongodb.net?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
 
-(async () => {
+export async function authenticateStudent(email, password) {
 	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const students = database.collection('students');
+	const student = await students.findOne({
+		'email': email,
+		'password': password
+	});
+
+	await client.close();
+
+	if (student !== null) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+export async function authenticateClub(email, password) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const clubs = database.collection('clubs');
+	const club = await clubs.findOne({
+		'email': email,
+		'password': password
+	});
+
+	await client.close();
+
+	if (club !== null) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+// CRUD Operations for Students
+export async function createStudent(email, password, name) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const students = database.collection('students');
+
+	if ((await students.findOne({'email': email})) !== null) {
+		return false;
+	}
+
+	const student = {
+		'email': email,
+		'password': password,
+		'name': name,
+		'totalClubs': 0,
+		'totalPosts': 0,
+		'joined': new Date(),
+		'friends': [],
+		'clubs': [],
+		'posts': []
+	};
+	await students.insertOne(student);
+
+	await client.close();
+	return true;
+}
+
+export async function readStudent(email) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const students = database.collection('students');
+	const student = await students.findOne({'email': email});
+
+	await client.close();
+	return student;
+}
+
+export async function updateStudent(email) {
+
+}
+
+// CRUD Operations for Clubs
+export async function createClub(email, password, name) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const clubs = database.collection('clubs');
+
+	if ((await clubs.findOne({'email': email})) !== null) {
+		return false;
+	}
+
+	const club = {
+		'email': email,
+		'password': password,
+		'name': name,
+		'likes': 0,
+		'members': [],
+		'posts': []
+	};
+	await clubs.insertOne(club);
+
+	await client.close();
+
+	return true;
+}
+
+export async function readClub(email) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const clubs = database.collection('clubs');
+	const club = await clubs.findOne({'email': email});
+
+	await client.close();
+	return club;
+}
+
+export async function updateClub(email) {
+
+}
+
+// CRUD Operations for Posts
+export async function createPost(username, text, timestamp) {
 	const database = client.db('club_connect');
 
-	async function validateUser(username, password) {
-		const user = await readUser(username);
-		if (user == null) {
-			return false;
-		} else {
-			if (user['password'] != password) {
-				return false;
-			} else {
-				return true;
-			}
-		}
+	const users = database.collection('users');
+	const posts = database.collection('posts');
+
+	const create = {
+		'text': text,
+		'timestamp': timestamp
+	};
+	const post = await posts.insertOne(create);
+
+	const query = {
+		'username': username
+	};
+	await users.updateOne(query, update);
+}
+
+export async function updatePost(postID, text, timestamp) {
+	const database = client.db('club_connect');
+
+	const posts = database.collection('posts');
+
+	const query = {'_id': postID};
+	const update = {
+		'text': text,
+		'timestamp': timestamp
 	}
+	await posts.updateOne(query, update);
+}
 
-	async function createUser(username, password, type, name, email) {
-		if (await readUser(username) != null) {
-			return false;
-		} else {
-			const users = database.collection('users');
+export async function deletePost(username, postID) {
 
-			const query = {
-				'username': username,
-				'password': password,
-				'name': name,
-				'email': email
-			};
-			if (type === "student") {
-				query['friends'] = [];
-				query['clubs'] = [];
-				query['posts'] = [];
-			} else if (type === "club") {
-				query['likes'] = 0;
-				query['members'] = [];
-				query['posts'] = []
-			}
-			await users.insertOne(query);
-
-			return true;
-		}
-	}
-
-	async function readUser(username) {
-		const users = database.collection('users');
-
-		const query = {'username': username};
-		const user = await users.findOne(query);
-
-		return user;
-	}
-
-	async function updateUser(username, user) {
-
-	}
-
-	async function createPost(username, text, timestamp) {
-		const users = database.collection('users');
-		const posts = database.collection('posts');
-
-		const create = {
-			'text': text,
-			'timestamp': timestamp
-		};
-		const post = await posts.insertOne(create);
-
-		const query = {
-			'username': username
-		};
-		await users.updateOne(query, update);
-	}
-
-	async function updatePost(postID, text, timestamp) {
-		const posts = database.collection('posts');
-		
-		const query = {'_id': postID};
-		const update = {
-			'text': text,
-			'timestamp': timestamp
-		}
-		await posts.updateOne(query, update);
-	}
-
-	async function deletePost(username, postID) {
-
-	}
-
-	module.exports.validateUser = validateUser;
-	module.exports.createUser = createUser;
-	module.exports.readUser = readUser;
-	module.exports.updateUser = updateUser;
-	module.exports.createPost = createPost;
-	module.exports.updatePost = updatePost;
-	module.exports.deletePost = deletePost;
-})();
+}

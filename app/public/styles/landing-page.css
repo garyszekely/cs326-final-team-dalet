@@ -31,7 +31,7 @@
 .login-container {
     border-right: 1px solid rgba(0,0,0,.1);
     width: 40%;
-    height: 75%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +40,7 @@
 .signup-container {
     border-left: 1px solid rgba(0,0,0,.1);
     width: 40%;
-    height: 75%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
