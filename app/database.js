@@ -161,7 +161,8 @@ export async function createPost(email, name, type, text, timestamp) {
 	const create = {
 		'name': name,
 		'text': text,
-		'timestamp': timestamp
+		'timestamp': timestamp,
+		'id': posts.length
 	};
 	const post = await posts.insertOne(create);
 
