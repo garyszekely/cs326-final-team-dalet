@@ -1,4 +1,4 @@
-async function getClubHomePage() {
+async function getStudentPersonalPage() {
     const res = await fetch('/read-student');
     const data = await res.json();
 
@@ -10,7 +10,7 @@ async function getClubHomePage() {
         document.getElementById('club-list').appendChild(e);
     }
 
-    //document.getElementById('student-description').innerHTML = data.description;
+    document.getElementById('student-description').innerHTML = data.bio;
 
     document.getElementById('post-list').innerHTML = '';
     for (let post of data.posts) {

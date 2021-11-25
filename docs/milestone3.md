@@ -8,6 +8,8 @@
 | email         | Text      | Registered email              |
 | password      | Text[]    | Salt & (encoded) password     |
 | name          | Text      | User's name                   |
+| bio           | Text      | User's introduction           |
+| joined        | Date      | User's joined date            |
 | friends       | Text[]    | Users the user friended       |
 | clubs         | Text[]    | Clubs the user joined         |
 | posts         | _id[]     | Posts the user posted         |
@@ -18,9 +20,14 @@
 | email         | Text      | Registered email              |
 | password      | Text[]    | Salt & (encoded) password     |
 | name          | Text      | Club's name                   |
+| bio           | Text      | Club's introduction           |
 | totalLikes    | Int       | Times an user likes the club  |
-| members       | Text[]    | total number of posts posted  |
-| posts         | _id[]     | posts the club posted         |
+| joined        | Date      | User's joined date            |
+| members       | Text[]    | Total number of posts posted  |
+| posts         | _id[]     | Posts the club posted         |
+| meeting       | Text      | When to members meet          |
+| contact       | Text      | Contact club leaders (phone #)|
+| location      | Text      | Location of meeting           |
 
 ### Post Collection
 | Column        | Data Type | Description                   |
@@ -43,3 +50,8 @@ Gary Szekely
 - Signup
 
 Dang Le Nguyen
+- Student Home Page Backend
+- Student Personal Page Backend
+- Club Home Page Backend
+- Club Personal Page Backend
+- Some database modifications

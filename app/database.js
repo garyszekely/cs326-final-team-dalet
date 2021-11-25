@@ -115,9 +115,12 @@ export async function createClub(email, password, name) {
 		'bio': 'No Bio',
 		'totalLikes': 0,
 		'joined': new Date().toLocaleDateString('en-US', {month: 'short', year: 'numeric'}),
-		'likes': 0,
+		'likes': 0, //???
 		'members': [],
-		'posts': []
+		'posts': [],
+		'meeting': '',
+		'contact': '',
+		'location': ''
 	};
 	await clubs.insertOne(club);
 
@@ -151,6 +154,8 @@ export async function readClubs(searchFor) {
 export async function updateClub(email) {
 
 }
+
+
 
 // CRUD Operations for Posts
 export async function createPost(email, name, type, text, timestamp) {
@@ -221,6 +226,29 @@ export async function updatePost(postID, text, timestamp) {
 	return true;
 }
 
+/*
 export async function deletePost(username, postID) {
 
+}
+*/
+
+//collection is "students" or "clubs"
+export async function deleteClubPost(email, timestamp, collection) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const colls = database.collection(collection);
+	const coll = await colls.findOne({'email': email});
+
+	const index;
+	for (const i = 0; i < coll.posts.length; ++i) {
+        if(post.timestamp == timestamp){
+			index = i;
+		}
+    }
+	coll.posts.splice(index, 1);
+
+	await colls.updateOne({'email': email},{ $set: {posts: coll.posts}});
+
+	await client.close();
 }
