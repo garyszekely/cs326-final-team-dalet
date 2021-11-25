@@ -221,6 +221,29 @@ export async function updatePost(postID, text, timestamp) {
 	return true;
 }
 
+/*
 export async function deletePost(username, postID) {
 
+}
+*/
+
+//collection is "students" or "clubs"
+export async function deleteClubPost(email, postID, collection) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const colls = database.collection(collection);
+	const coll = await colls.findOne({'email': email});
+
+	const index;
+	for (const i = 0; i < coll.posts.length; ++i) {
+        if(post.id == postID){
+			index = i;
+		}
+    }
+	coll.posts.splice(index, 1);
+
+	await colls.updateOne({'email': email},{ $set: {posts: coll.posts}});
+
+	await client.close();
 }
