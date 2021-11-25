@@ -115,9 +115,12 @@ export async function createClub(email, password, name) {
 		'bio': 'No Bio',
 		'totalLikes': 0,
 		'joined': new Date().toLocaleDateString('en-US', {month: 'short', year: 'numeric'}),
-		'likes': 0,
+		'likes': 0, //???
 		'members': [],
-		'posts': []
+		'posts': [],
+		'meeting': '',
+		'contact': '',
+		'location': ''
 	};
 	await clubs.insertOne(club);
 
@@ -151,6 +154,8 @@ export async function readClubs(searchFor) {
 export async function updateClub(email) {
 
 }
+
+
 
 // CRUD Operations for Posts
 export async function createPost(email, name, type, text, timestamp) {
