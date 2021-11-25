@@ -241,7 +241,7 @@ export async function deleteClubPost(email, timestamp, collection) {
 	const coll = await colls.findOne({'email': email});
 
 	let index;
-	for (const i = 0; i < coll.posts.length; ++i) {
+	for (let i = 0; i < coll.posts.length; ++i) {
         if(post.timestamp == timestamp){
 			index = i;
 		}
