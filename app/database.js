@@ -161,8 +161,7 @@ export async function createPost(email, name, type, text, timestamp) {
 	const create = {
 		'name': name,
 		'text': text,
-		'timestamp': timestamp,
-		'id': posts.length
+		'timestamp': timestamp
 	};
 	const post = await posts.insertOne(create);
 
@@ -229,7 +228,7 @@ export async function deletePost(username, postID) {
 */
 
 //collection is "students" or "clubs"
-export async function deleteClubPost(email, postID, collection) {
+export async function deleteClubPost(email, timestamp, collection) {
 	await client.connect();
 	const database = client.db('club_connect_db');
 
@@ -238,7 +237,7 @@ export async function deleteClubPost(email, postID, collection) {
 
 	const index;
 	for (const i = 0; i < coll.posts.length; ++i) {
-        if(post.id == postID){
+        if(post.timestamp == timestamp){
 			index = i;
 		}
     }
