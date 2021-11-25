@@ -1,6 +1,6 @@
 'use strict';
 
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 
 const uri = 'mongodb+srv://admin:pwd@teamdaletcluster.3ramk.mongodb.net?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
@@ -17,11 +17,11 @@ export async function authenticateStudent(email, password) {
 
 	await client.close();
 
-	if (student !== null) {
-		return true;
-	} else {
+	if (student === null) {
 		return false;
 	}
+
+	return true;
 }
 
 export async function authenticateClub(email, password) {
@@ -36,11 +36,11 @@ export async function authenticateClub(email, password) {
 
 	await client.close();
 
-	if (club !== null) {
-		return true;
-	} else {
+	if (club === null) {
 		return false;
 	}
+
+	return true;
 }
 
 // CRUD Operations for Students
@@ -58,9 +58,8 @@ export async function createStudent(email, password, name) {
 		'email': email,
 		'password': password,
 		'name': name,
-		'totalClubs': 0,
-		'totalPosts': 0,
-		'joined': new Date(),
+		'bio': 'No Bio',
+		'joined': new Date().toLocaleDateString('en-US', {month: 'short', year: 'numeric'}),
 		'friends': [],
 		'clubs': [],
 		'posts': []
@@ -82,6 +81,18 @@ export async function readStudent(email) {
 	return student;
 }
 
+export async function readStudents(searchFor) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const students = database.collection('students');
+	students.createIndex({'name': 'text'});
+	const searchedStudents = await students.find({$text: {$search: searchFor}}).toArray();
+	
+	await client.close();
+	return searchedStudents;
+}
+
 export async function updateStudent(email) {
 
 }
@@ -101,6 +112,9 @@ export async function createClub(email, password, name) {
 		'email': email,
 		'password': password,
 		'name': name,
+		'bio': 'No Bio',
+		'totalLikes': 0,
+		'joined': new Date().toLocaleDateString('en-US', {month: 'short', year: 'numeric'}),
 		'likes': 0,
 		'members': [],
 		'posts': []
@@ -108,7 +122,6 @@ export async function createClub(email, password, name) {
 	await clubs.insertOne(club);
 
 	await client.close();
-
 	return true;
 }
 
@@ -123,40 +136,89 @@ export async function readClub(email) {
 	return club;
 }
 
+export async function readClubs(searchFor) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const clubs = database.collection('clubs');
+	clubs.createIndex({'name': 'text'});
+	const searchedClubs = await clubs.find({$text: {$search: searchFor}}).toArray();
+
+	await client.close();
+	return searchedClubs;
+}
+
 export async function updateClub(email) {
 
 }
 
 // CRUD Operations for Posts
-export async function createPost(username, text, timestamp) {
-	const database = client.db('club_connect');
+export async function createPost(email, name, type, text, timestamp) {
+	await client.connect();
+	const database = client.db('club_connect_db');
 
-	const users = database.collection('users');
 	const posts = database.collection('posts');
-
 	const create = {
+		'name': name,
 		'text': text,
 		'timestamp': timestamp
 	};
 	const post = await posts.insertOne(create);
 
-	const query = {
-		'username': username
-	};
-	await users.updateOne(query, update);
+	if (type === 'student') {
+		const students = database.collection('students');
+		students.updateOne({'email': email}, {$push: {'posts': post['_id']}});
+		return true;
+	} else if (type === 'club') {
+		const clubs = database.collection('clubs');
+		clubs.updateOne({'email': email}, {$push: {'posts': post['_id']}});
+		return true;
+	} else {
+
+	}
+	return false;
+}
+
+export async function readPosts(email, type) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+	
+	const posts = database.collection('posts')
+
+	if (type === 'student') {
+		const students = database.collection('students');
+		const student = await students.findOne({'email': email});
+		const studentPosts = [];
+		for (let postID of student['posts']) {
+			const post = await posts.findOne({'_id': ObjectId(postID)});
+			studentPosts.push(post);
+		}
+		return studentPosts;
+	} else if (type === 'club') {
+		const clubs = database.collection('clubs');
+		const club = await clubs.findOne({'email': email});
+		const clubPosts = [];
+		for (let postID of club['posts']) {
+			const post = await posts.findOne({'_id': postID});
+			studentPosts.push(post);
+		}
+		return clubPosts;
+	} else {
+
+	}
+	return [];
 }
 
 export async function updatePost(postID, text, timestamp) {
-	const database = client.db('club_connect');
+	await client.connect();
+	const database = client.db('club_connect_db');
 
 	const posts = database.collection('posts');
-
-	const query = {'_id': postID};
-	const update = {
+	await posts.updateOne({'_id': postID}, {
 		'text': text,
 		'timestamp': timestamp
-	}
-	await posts.updateOne(query, update);
+	});
+	return true;
 }
 
 export async function deletePost(username, postID) {

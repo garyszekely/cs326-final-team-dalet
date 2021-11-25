@@ -18,7 +18,7 @@
     color: white; 
     font-size: 25pt; 
     width: 16%; 
-    text-align: center;"
+    text-align: center;
 }
 
 .main-container {
@@ -70,19 +70,6 @@
 .card {
     margin-bottom: 20px; 
     width: 90%;
-}
-
-#num-of-members-filter > label {
-    margin-right: 10px;
-}
-
-#num-of-members-filter > select, #num-of-members-filter > input {
-    width: 25%; 
-    margin-right: 10px;
-}
-
-#num-of-members-filter, #club-types-filter {
-    margin-left: 20px;
 }
 
 .card_body {

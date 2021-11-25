@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
-        <link rel="stylesheet" href="styles/profile-page.css">
+        <link rel="stylesheet" href="../styles/find-friends-clubs.css">
         <link rel="icon" href="https://fontmeme.com/permalink/211124/5502e118344bb7ea270e5f49dc022ec0.png" />
-        <title>Student Profile Page</title>
+        <title>Find Friends/Clubs</title>
     </head>
     <body>
         <nav class="navbar navbar-expand">
@@ -26,44 +26,32 @@
             <button id="logout-btn" class="btn btn-danger">Logout</button>
         </nav>
         <div class="main-container">
-            <div class="profile-container">
-                <div class="profile-header-container">
-                    <div class="profile-picture-container">
-                        <img width="150px" height="150px" id="profile-picture" src="index/images/default.jpg" />
-                    </div>
-                    <div class="name-bio-container">
-                        <h1 id="name"></h1>
-                        <p id="profile-bio"></p>
-                    </div>
-                </div>
-                <div class="profile-main-container">
-                    <div class="profile-sidebar-container">
-                        <h4>Total Clubs</h4>
-                        <h5 id="total-clubs"></h5>
-                        <hr>
-                        <h4>Total Posts</h4>
-                        <h5 id="total-posts"></h5>
-                        <hr>
-                        <h4>Joined</h4>
-                        <h5 id="joined"></h5>
-                    </div>
-                    <div id="posts" class="feed-container"></div>
+            <div class="controls-container">
+                <div class="search-container">
+                    <form id="search-form">
+                        <label for="type" class="form-label">Searching for:</label>
+                        <select name="type" class="form-control" required>
+                            <option disabled selected></option>
+                            <option value="students">Students</option>
+                            <option value="clubs">Clubs</option>
+                        </select>
+                        <br>
+                        <div style="display: flex; align-items: center;">
+                            <input name="search-for" type="search" class="form-control" placeholder="Search..." required>
+                            <button type="submit" class="btn btn-primary" style="margin-left: 10px; background-color: transparent; border: 0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="sidebar-container">
-                <div class="controls-container">
-                    <button id="add-friends-btn" class="btn btn-primary">Add Friend</button>
-                </div>
-                <div class="clubs-container">
-                    <h3 id="sidebar-header">Clubs</h3>
-                    <hr>
-                    <ul id="clubs"></ul>
-                </div>
-            </div>
+            <div id="results" class="clubs-container"></div>
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="scripts/studentStudentProfilePage.js"></script>
+        <script src="scripts/findFriendsClubs.js"></script>
     </body>
 </html>

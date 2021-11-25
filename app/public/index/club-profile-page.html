@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
-        <link rel="stylesheet" href="../styles/profile-page-styles.css">
+        <link rel="stylesheet" href="styles/profile-page.css">
+        <link rel="icon" href="https://fontmeme.com/permalink/211124/5502e118344bb7ea270e5f49dc022ec0.png" />
         <title>Club Profile Page</title>
     </head>
     <body>
@@ -13,30 +14,25 @@
             <h1 class="navbar-brand">ClubConnect</h1>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/index/student-home-page.html">Home</a>
+                    <a class="nav-link" href="/home-page">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/index/student-personal-page.html">Profile</a>
+                    <a class="nav-link" href="/personal-page">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/index/find-clubs.html">Find Clubs</a>
+                    <a class="nav-link" href="/find-friends-clubs">Find Friends/Clubs</a>
                 </li>
             </ul>
-            <form class="form-inline">
-                <input type="search" id="search" class="form-control" placeholder="Search...">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-            </form>
+            <button id="logout-btn" class="btn btn-danger">Logout</button>
         </nav>
         <div class="main-container">
             <div class="profile-container">
                 <div class="profile-header-container">
                     <div class="profile-picture-container">
-                        <img width="150px" height="150x" id="profile-picture" src="images/default.jpg" />
+                        <img width="150px" height="150x" id="profile-picture" src="index/images/default.jpg" />
                     </div>
                     <div class="name-bio-container">
-                        <h1 id="club-name"></h1>
+                        <h1 id="name"></h1>
                         <p id="profile-bio"></p>
                     </div>
                 </div>
@@ -51,22 +47,15 @@
                         <h4>Total Likes</h4>
                         <h5 id="total-likes"></h5>
                         <hr>
-                        <h4>Created</h4>
-                        <h5 id="created"></h5>
-                        <hr>
                         <h4>Joined</h4>
                         <h5 id="joined"></h5>
                     </div>
-                    <div id="posts" class="feed-container">
-                        <br>
-                    </div>
+                    <div id="posts" class="feed-container"></div>
                 </div>
             </div>
             <div class="sidebar-container">
                 <div class="controls-container">
-                    <button id="join-club-btn" class="btn btn-primary">
-                        Join Club
-                    </button>
+                    <button id="join-club-btn" class="btn btn-primary">Join Club</button>
                     <button id="like-club-btn" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
                             <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
@@ -80,14 +69,13 @@
                 <div class="clubs-container">
                     <h3 id="sidebar-header">Members</h3>
                     <hr>
-                    <ul id="members">
-                    </ul>
+                    <ul id="members"></ul>
                 </div>
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="../clubProfilePage.js"></script>
+        <script src="scripts/clubProfilePage.js"></script>
     </body>
 </html>

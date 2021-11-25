@@ -4,10 +4,12 @@ import express from 'express';
 import expressSession from 'express-session';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { authenticateStudent, authenticateClub, createStudent, readClub, createClub, readStudent } from './database.js';
+import { authenticateStudent, authenticateClub, createStudent, readStudent, readStudents, createClub, readClub, createPost, readPosts, updatePost, readClubs } from './database.js';
 
+// Create app with Express
 const app = express();
 
+// Use LocalStrategy with Passport
 passport.use(new LocalStrategy({
 	usernameField: 'email',
 	passReqToCallback: true
@@ -33,8 +35,9 @@ passport.use(new LocalStrategy({
 	return done(null, false, {message: 'Incorrect email and/or password.'});
 }));
 
+// App configuration
 app.use(expressSession({
-	secret: 'SECRET',
+	secret: process.env.SECRET || 'SECRET',
 	resave: false,
 	saveUninitialized: false
 }));
@@ -44,13 +47,13 @@ app.use(express.static('app/public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Passport configuration
 passport.serializeUser((user, done) => {
     done(null, user);
 });
 passport.deserializeUser((id, done) => {
     done(null, id);
 });
-
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) {
 		next();
@@ -59,36 +62,43 @@ function isLoggedIn(req, res, next) {
 	}
 }
 
+// Routing: Landing Page
 app.get('/', (req, res) => {
 	res.sendFile('landing-page.html', {root: 'app/public/index/'});
 });
 
-app.get('/homepage', isLoggedIn, (req, res) => {
+// Routing: Home Page
+app.get('/home-page', isLoggedIn, (req, res) => {
 	const userType = req.user['type'];
 
 	if (userType === 'student') {
-		res.sendFile('student-homepage.html', {root: 'app/public/index/'});
+		res.sendFile('student-home-page.html', {root: 'app/public/index/'});
 	} else if (userType === 'club') {
-		res.sendFile('club-homepage.html', {root: 'app/public/index/'});
+		res.sendFile('club-home-page.html', {root: 'app/public/index/'});
 	}
 });
 
+// Routing: Personal Page
 app.get('/personal-page', isLoggedIn, async (req, res) => {
-	if (req.user['type'] === 'student') {
+	const userType = req.user['type']
+
+	if (userType === 'student') {
 		res.sendFile('student-personal-page.html', {root: 'app/public/index/'});
-	} else if (req.user['type'] === 'club') {
+	} else if (userType === 'club') {
 		res.sendFile('club-personal-page.html', {root: 'app/public/index/'});
 	}
 });
 
+// Routing: Profile Page
 app.get('/profile-page', isLoggedIn, (req, res) => {
 	const userType = req.user['type'];
 	const profileType = req.query['type'];
+
 	if (userType === 'student') {
 		if (profileType === 'student') {
 			res.sendFile('student-student-profile-page.html', {root: 'app/public/index/'})
-		} else if (profileType === 'student') {
-			res.sendFile('student-club-profile-page.html', {root: 'app/public/index/'})
+		} else if (profileType === 'club') {
+			res.sendFile('club-profile-page.html', {root: 'app/public/index/'})
 		}
 	} else if (userType === 'club') {
 		if (profileType === 'student') {
@@ -97,19 +107,39 @@ app.get('/profile-page', isLoggedIn, (req, res) => {
 	}
 });
 
-app.get('/find-clubs', isLoggedIn, (req, res) => {
-	if (req.user['type'] === 'student') {
-		res.sendFile('find-clubs.html', {root: 'app/public/index/'})
+// Routing: Find Clubs Page
+app.get('/find-friends-clubs', isLoggedIn, (req, res) => {
+	const userType = req.user['type'];
+
+	if (userType === 'student') {
+		res.sendFile('find-friends-clubs.html', {root: 'app/public/index/'})
 	} else {
-		res.redirect('/homepage');
+		res.redirect('/home-page');
 	}
 });
 
+app.get('/find-members', isLoggedIn, (req, res) => {
+	const userType = req.user['type'];
+
+	if (userType === 'club') {
+		res.sendFile('find-members.html', {root: 'app/public/index'});
+	} else {
+		res.redirect('/home-page');
+	}
+});
+
+// API: Login
 app.post('/login', passport.authenticate('local', {
-	successRedirect: '/homepage',
+	successRedirect: '/home-page',
 	failureRedirect: '/',
 }));
 
+app.get('/logout', (req, res) => {
+	req.logout();
+	res.end();
+});
+
+// API: Create Student
 app.post('/create-student', async (req, res) => {
 	const email = req.body['email'];
 	const password = req.body['password'];
@@ -120,10 +150,12 @@ app.post('/create-student', async (req, res) => {
 	} else {
 		res.sendStatus(400);
 	}
+
 	res.end();
 });
 
-app.get('/read-student', async (req, res) => {
+// API: Read Student
+app.get('/read-student', isLoggedIn, async (req, res) => {
 	const email = req.query['email'];
 	const student = await readStudent(email);
 
@@ -132,9 +164,19 @@ app.get('/read-student', async (req, res) => {
 	} else {
 		res.sendStatus(400);
 	}
+
 	res.end();
 });
 
+app.get('/read-students', isLoggedIn, async (req, res) => {
+	const searchFor = req.query['searchFor'];
+	const students = await readStudents(searchFor);
+
+	res.send(JSON.stringify(students));
+	res.end();
+});
+
+// API: Create Club
 app.post('/create-club', async (req, res) => {
 	const email = req.body['email'];
 	const password = req.body['password'];
@@ -145,10 +187,12 @@ app.post('/create-club', async (req, res) => {
 	} else {
 		res.sendStatus(400);
 	}
+
 	res.end();
 });
 
-app.get('/read-club', async (req, res) => {
+// API: Read Club
+app.get('/read-club', isLoggedIn, async (req, res) => {
 	const email = req.query['email'];
 	const club = await readClub(email);
 
@@ -157,29 +201,61 @@ app.get('/read-club', async (req, res) => {
 	} else {
 		res.sendStatus(400);
 	}
+
 	res.end();
 });
 
-app.post('/create-post', async (req, res) => {
-	const username = req.body['username'];
+app.get('/read-clubs', isLoggedIn, async (req, res) => {
+	const searchFor = req.query['searchFor'];
+	const clubs = await readClubs(searchFor);
+
+	res.send(JSON.stringify(clubs));
+	res.end();
+})
+
+// API: Create Post
+app.post('/create-post', isLoggedIn, async (req, res) => {
+	const email = req.user['email'];
+	const type = req.user['type'];
 	const text = req.body['text'];
-	const timestamp = req.body['timestamp'];
+	const timestamp = new Date().toLocaleDateString('en-US', {hour: 'numeric', minute: 'numeric', day: 'numeric', month: 'short', year: 'numeric'});
 
-	await database.createPost(username, text, timestamp);
-
+	if (await createPost(email, type, text, timestamp)) {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(400);
+	}
 	res.end();
 });
 
-app.post('/update-post', async (req, res) => {
-	const username = req.body['username'];
+app.get('/read-posts', isLoggedIn, async (req, res) => {
+	const email = req.query['email'];
+	const type = req.query['type'];
+
+	const posts = await readPosts(email, type);
+	res.send(JSON.stringify(posts));
+	res.end();
+});
+
+app.post('/update-post', isLoggedIn, async (req, res) => {
+	const postID = req.body['postID'];
+	const text = req.body['text'];
+	const timestamp = new Date().toLocaleDateString('en-US', {hour: 'numeric', minute: 'numeric', day: 'numeric', month: 'short', year: 'numeric'});
+
+	if (await updatePost(postID, text, timestamp)) {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(400);
+	}
 	
 	res.end();
 });
 
-app.post('/delete-post', async (req, res) => {
+app.post('/delete-post', isLoggedIn, async (req, res) => {
 	res.end();
 });
 
+// OUTDATED ROUTES
 
 app.get('/page', (req, res) => {
 	utils.redirect(req, res);
@@ -322,4 +398,4 @@ app.get('/club/info', (req, res) => {
 	res.end;
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);

@@ -1,61 +1,72 @@
-async function getClubInfo() {
-    const res = await fetch('/club/info')
-    const data = await res.json();
-    document.getElementById('club-name').innerHTML = data.clubName;
-    document.getElementById('profile-bio').innerHTML = data.clubDescription;
-    document.getElementById('total-members').innerHTML = data.totalMembers;
-    document.getElementById('total-posts').innerHTML = data.totalPosts;
-    document.getElementById('total-likes').innerHTML = data.totalLikes;
-    document.getElementById('created').innerHTML = data.created;
-    document.getElementById('joined').innerHTML = data.joined;
-    document.getElementById('members').innerHTML = '';
-    for (let member of data.members) {
-        const e = document.createElement('li');
-        e.innerHTML = member
-        document.getElementById('members').appendChild(e);
-    }
-    for (let post of data.posts){
-        const cardElement = document.createElement('div');
-        cardElement.classList.add('card');
-        const cardHeaderElement = document.createElement('div');
-        cardHeaderElement.classList.add('card-header');
-        const cardTitleElement = document.createElement('div');
-        cardTitleElement.classList.add('card-title');
-        cardTitleElement.innerHTML = post.clubName;
-        const cardBodyElement = document.createElement('div');
-        cardBodyElement.classList.add('card-body')
-        const cardTextElement = document.createElement('p');
-        cardTextElement.classList.add('card-text');
-        cardTextElement.innerHTML = post.text;
-        const cardFooterElement = document.createElement('div');
-        cardFooterElement.classList.add('card-footer');
-        cardFooterElement.classList.add('text-muted');
-        cardFooterElement.innerHTML = post.timestamp;
-        cardHeaderElement.appendChild(cardTitleElement);
-        cardBodyElement.appendChild(cardTextElement);
-        cardElement.appendChild(cardHeaderElement);
-        cardElement.appendChild(cardBodyElement);
-        cardElement.appendChild(cardFooterElement);
-        document.getElementById('posts').appendChild(cardElement);
-    }
-}
+window.addEventListener('load', async () => {
+    const profileEmail = localStorage.getItem('profileEmail');
 
-async function addClubMember() {
-    const res = await fetch('/club/member/new', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({member: localStorage.getItem('studentName')})
+    const readClubRes = await fetch('/read-club?' + 'email=' + profileEmail);
+    if (readClubRes.ok) {
+        const club = await readClubRes.json();
+
+        document.getElementById('name').innerHTML = club.name;
+        document.getElementById('profile-bio').innerHTML = club.bio;
+        document.getElementById('total-members').innerHTML = club.members.length;
+        document.getElementById('total-posts').innerHTML = club.posts.length;
+        document.getElementById('total-likes').innerHTML = club.totalLikes;
+        document.getElementById('joined').innerHTML = club.joined;
+
+        for (let member of club.members) {
+            const li = document.createElement('li');
+            li.innerHTML = member;
+            document.getElementById('clubs').appendChild(li);
+        }
+
+        const readPostsRes = await fetch('/read-posts?' + 'email=' + profileEmail + '&type=student');
+        if (readPostsRes.ok) {
+            const posts = await readPostsRes.json();
+            document.getElementById('posts').innerHTML = null;
+            for (let post of posts){
+                const card = document.createElement('div');
+                card.classList.add('card');
+
+                const cardHeader = document.createElement('div');
+                cardHeader.classList.add('card-header');
+
+                const cardTitle = document.createElement('div');
+                cardTitle.classList.add('card-title');
+                cardTitle.innerHTML = post.name;
+
+                const cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
+
+                const cardText = document.createElement('p');
+                cardText.classList.add('card-text');
+                cardText.innerHTML = post.text;
+
+                const cardFooter = document.createElement('div');
+                cardFooter.classList.add('card-footer');
+                cardFooter.classList.add('text-muted');
+                cardFooter.innerHTML = post.timestamp;
+
+                cardHeader.appendChild(cardTitle);
+                cardBody.appendChild(cardText);
+                card.appendChild(cardHeader);
+                card.appendChild(cardBody);
+                card.appendChild(cardFooter);
+                document.getElementById('posts').appendChild(card);
+            }
+        }
+    } else {
+        window.location.href = '/home-page';
+    }
+
+    document.getElementById('join-club-btn').addEventListener('click', () => {
+        
     });
-}
 
-async function addClubLike() {
-    const res = await fetch('/club/like/new');
-}
+    document.getElementById('like-club-btn').addEventListener('click', () => {
+        
+    });
 
-window.onload = () => {
-    getClubInfo();
-    document.getElementById('join-club-btn').addEventListener('click', addClubMember);
-    document.getElementById('like-club-btn').addEventListener('click', addClubLike);
-}
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+        await fetch('/logout');
+        window.location.href = '/';
+    });
+});
