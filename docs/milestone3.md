@@ -50,3 +50,8 @@ Gary Szekely
 - Signup
 
 Dang Le Nguyen
+- Student Home Page Backend
+- Student Personal Page Backend
+- Club Home Page Backend
+- Club Personal Page Backend
+- Some database modifications
