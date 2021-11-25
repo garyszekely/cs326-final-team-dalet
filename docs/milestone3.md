@@ -1,36 +1,45 @@
 # Milestone 3
 
-## Server Documentation
+## Collections
 
-## Collection
+### Student Collection
+| Field         | Data Type | Description                   |
+|---------------|-----------|-------------------------------|
+| email         | Text      | Registered email              |
+| password      | Text[]    | Salt & (encoded) password     |
+| name          | Text      | User's name                   |
+| friends       | Text[]    | Users the user friended       |
+| clubs         | Text[]    | Clubs the user joined         |
+| posts         | _id[]     | Posts the user posted         |
 
-### User Table
+### Club Collection
 | Column        | Data Type | Description                   |
 |---------------|-----------|-------------------------------|
-| Email         | Text      | Registered email              |
-| Password      | Text[]    | Salt & (encoded) password     |
-| Name          | Text      | User's name                   |
-| totalClubs    | int       | Total number of clubs joined  |
-| totalPosts    | int       | Total number of posts posted  |
-| friends       | User[]    | Users the user friended       |
-| clubs         | Club[]    | Clubs the user joined         |
-| posts         | Text[]    | Posts the user posted         |
+| email         | Text      | Registered email              |
+| password      | Text[]    | Salt & (encoded) password     |
+| name          | Text      | Club's name                   |
+| totalLikes    | Int       | Times an user likes the club  |
+| members       | Text[]    | total number of posts posted  |
+| posts         | _id[]     | posts the club posted         |
 
-### Club Table
+### Post Collection
 | Column        | Data Type | Description                   |
 |---------------|-----------|-------------------------------|
-| Email         | Text      | Registered email              |
-| Password      | Text[]    | Salt & (encoded) password     |
-| Name          | Text      | Club's name                   |
-| likes         | Int       | Times an user likes the club  |
-| members       | User[]    | total number of posts posted  |
-| posts         | Text[]    | posts the club posted         |
+| name          | Text      | Name                          |
+| text          | Text      | The text of the post          |
+| timestamp     | Text      | Time of post                  |
+
+## Heroku
 
 ## Division of Labor
-- Gary Szekely
-    - 
+Gary Szekely
+- Landing Page Backend
+- Find Members Page Backend
+- Find Friends/Clubs Page Backend
+- Club Profile Page Backend
+- Student Profile Pages Backend
+- Create/Read Operations for Student, Club, and Posts
+- Login/Logout
+- Signup
 
-- Dang Le Nguyen
-    - 
-
-## [Heroku Link]([insert link here])
+Dang Le Nguyen

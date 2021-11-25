@@ -4,6 +4,7 @@ import express from 'express';
 import expressSession from 'express-session';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
+import dotenv from 'dotenv';
 import { authenticateStudent, authenticateClub, createStudent, readStudent, readStudents, createClub, readClub, createPost, readPosts, updatePost, readClubs } from './database.js';
 
 // Create app with Express
@@ -61,6 +62,9 @@ function isLoggedIn(req, res, next) {
 		res.redirect('/');
 	}
 }
+
+// Environment configuration
+dotenv.config();
 
 // Routing: Landing Page
 app.get('/', (req, res) => {
