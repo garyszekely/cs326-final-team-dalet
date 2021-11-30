@@ -1,10 +1,11 @@
+// On student-confirm-password input keyup
 document.getElementById('student-confirm-password').addEventListener('keyup', () => {
     const studentPassword = document.getElementById('student-password');
     const studentConfirmPassword = document.getElementById('student-confirm-password');
 
-    if (studentConfirmPassword.value == '') {
+    if (studentConfirmPassword.value === '') {
         studentConfirmPassword.style.backgroundColor = 'white';
-    } else if (studentPassword.value == studentConfirmPassword.value) {
+    } else if (studentPassword.value === studentConfirmPassword.value) {
         studentConfirmPassword.style.backgroundColor = "green";
         studentConfirmPassword.style.color = 'black';
     } else {
@@ -13,6 +14,7 @@ document.getElementById('student-confirm-password').addEventListener('keyup', ()
     }
 });
 
+// On club-confirm-password input keyup
 document.getElementById('club-confirm-password').addEventListener('keyup', () => {
     const clubPassword = document.getElementById('club-password');
     const clubConfirmPassword = document.getElementById('club-confirm-password');
@@ -28,6 +30,7 @@ document.getElementById('club-confirm-password').addEventListener('keyup', () =>
     }
 });
 
+// On student-signup form submit
 document.getElementById('student-signup').addEventListener('submit', async (event) => {
     event.preventDefault();
     
@@ -51,20 +54,22 @@ document.getElementById('student-signup').addEventListener('submit', async (even
 
         if (res.ok) {
             $('#student-signup-modal').modal('hide');
-            alert('Signup successful! Please log in to continue.')
+            alert('Signup successful! Please log in to continue.');
         } else {
-            alert('Signup failed! Please try again...')
+            alert('Signup failed! Please try again...');
         }
+    } else {
+        alert('Passwords do not match! Please try again...');
     }
 });
 
+// On club-signup form submit
 document.getElementById('club-signup').addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const email = document.getElementById('club-email').value;
     const password = document.getElementById('club-password').value;
     const name = document.getElementById('club-name').value;
-    const type = document.getElementById('club-type').value;
     const confirmPassword = document.getElementById('club-confirm-password').value;
 
     if (password === confirmPassword) {
@@ -76,8 +81,7 @@ document.getElementById('club-signup').addEventListener('submit', async (event) 
             body: JSON.stringify({
                 'email': email,
                 'password': password,
-                'name': name,
-                'type': type
+                'name': name
             })
         });
 
@@ -85,7 +89,9 @@ document.getElementById('club-signup').addEventListener('submit', async (event) 
             $('#club-signup-modal').modal('hide');
             alert('Signup successful! Please log in to continue.');
         } else {
-            alert('Signup failed! Please try again...')
+            alert('Signup failed! Please try again...');
         }
+    } else {
+        alert('Passwords do not match! Please try again...');
     }
 });

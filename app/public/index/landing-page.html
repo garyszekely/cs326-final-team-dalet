@@ -15,7 +15,7 @@
         </div>
         <div class="main-container">
             <div class="login-container">
-                <h2 class="container-header">Login</h2>
+                <h2 class="header-container">Login</h2>
                 <br>
                 <form action="/login" method="post">
                     <label for="type" class="form-label">I am a(n):</label>
@@ -32,13 +32,13 @@
                     <label for="password" class="form-label">Password:</label>
                     <input type="password" name="password" class="form-control" placeholder="Enter password..." required>
                     <br>
-                    <div id="login-btn-container">
+                    <div class="login-btn-container">
                         <input type="submit" class="btn btn-primary" id="login-btn" value="Log In">
                     </div>
                 </form>
             </div>
             <div class="signup-container">
-                <h2 class="container-header">Signup</h2>
+                <h2 class="header-container">Signup</h2>
                 <br>
                 <br>
                 <button type="button" class="btn btn-primary" id="student-signup-btn" data-toggle="modal" data-target="#student-signup-modal">Sign Up as Student</button>
@@ -98,7 +98,7 @@
                                     <div class="form-row">
                                         <div class="col-md-12">
                                             <label for="club-name" class="form-label">Name:</label>
-                                            <input type="text" id="club-name" class="form-control" placeholder="Enter club name..." required>
+                                            <input type="text" id="club-name" class="form-control" placeholder="Enter name..." required>
                                         </div>
                                     </div>
                                     <br>

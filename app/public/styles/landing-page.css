@@ -28,6 +28,12 @@
     font-weight: bold;
 }
 
+.logo-container > h1 {
+    font-family: Lobster; 
+    font-size: 65pt; 
+    font-weight: bold;
+}
+
 .login-container {
     border-right: 1px solid rgba(0,0,0,.1);
     width: 40%;
@@ -46,7 +52,7 @@
     align-items: center;
 }
 
-.container-header {
+.header-container {
     font-weight: bold;
 }
 
@@ -67,7 +73,7 @@
     width: 50%;
 }
 
-#login-btn-container {
+.login-btn-container {
     text-align: center;
 }
 
@@ -78,10 +84,4 @@
 .modal-footer {
     display: flex; 
     justify-content: center;
-}
-
-.logo-container > h1 {
-    font-family: Lobster; 
-    font-size: 65pt; 
-    font-weight: bold;
 }
