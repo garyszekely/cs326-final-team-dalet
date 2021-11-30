@@ -123,7 +123,6 @@ export async function createClub(email, password, name) {
 		'bio': 'No Bio',
 		'totalLikes': 0,
 		'joined': new Date().toLocaleDateString('en-US', {month: 'short', year: 'numeric'}),
-		'likes': 0, //???
 		'members': [],
 		'posts': [],
 		'meeting': '',
