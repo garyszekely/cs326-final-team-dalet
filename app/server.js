@@ -7,6 +7,26 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import dotenv from 'dotenv';
 import { authenticateStudent, authenticateClub, createStudent, readStudent, readStudents, createClub, readClub, createPost, readPosts, updatePost, readClubs } from './database.js';
 
+/**
+ * Initialization
+ * 
+ * Overview:
+ * 	Create App with Express
+ * 	Use LocalStrategy with Passport
+ * 	App Configuration:
+ * 		Use expressSession
+ * 		Use urlencoded
+ * 		Use static 'app/public'
+ * 		Use passport initialize
+ * 		Use passport session
+ *	Passport Configuratuon:
+ *		Serialize user
+ *		Deserialize user
+ *		Use isLoggedIn
+ *	Environment Configuration:
+ *		Use config
+ */
+
 // Create app with Express
 const app = express();
 
@@ -66,12 +86,25 @@ function isLoggedIn(req, res, next) {
 // Environment configuration
 dotenv.config();
 
-// Routing: Landing Page
+/**
+ * Routing
+ * 
+ * Overview:
+ * 	/: Landing Page
+ * 	/home-page: Home Page
+ * 	/personal-page: Personal Page
+ * 	/profile-page: Profile Page
+ * 	/find-friends-clubs: Find Friends Clubs Page
+ * 	/find-members: Find Members
+ */
+
+// Landing Page
 app.get('/', (req, res) => {
 	res.sendFile('landing-page.html', {root: 'app/public/index/'});
 });
 
-// Routing: Home Page
+// Home Page
+// Login Required
 app.get('/home-page', isLoggedIn, (req, res) => {
 	const userType = req.user['type'];
 
@@ -82,7 +115,8 @@ app.get('/home-page', isLoggedIn, (req, res) => {
 	}
 });
 
-// Routing: Personal Page
+// Personal Page
+// Login Required
 app.get('/personal-page', isLoggedIn, async (req, res) => {
 	const userType = req.user['type']
 
@@ -93,7 +127,9 @@ app.get('/personal-page', isLoggedIn, async (req, res) => {
 	}
 });
 
-// Routing: Profile Page
+// Profile Page
+// Login Required
+// Query: {type: string}
 app.get('/profile-page', isLoggedIn, (req, res) => {
 	const userType = req.user['type'];
 	const profileType = req.query['type'];
@@ -111,7 +147,8 @@ app.get('/profile-page', isLoggedIn, (req, res) => {
 	}
 });
 
-// Routing: Find Friends/Clubs Page
+// Find Friends/Clubs Page
+// Login Required
 app.get('/find-friends-clubs', isLoggedIn, (req, res) => {
 	const userType = req.user['type'];
 
@@ -122,7 +159,8 @@ app.get('/find-friends-clubs', isLoggedIn, (req, res) => {
 	}
 });
 
-// Routing: Find Members Page
+// Find Members Page
+// Login Required
 app.get('/find-members', isLoggedIn, (req, res) => {
 	const userType = req.user['type'];
 
@@ -133,18 +171,35 @@ app.get('/find-members', isLoggedIn, (req, res) => {
 	}
 });
 
-// API: Login
+/**
+ * API
+ * 
+ * Overview:
+ * 	/login: Login
+ * 	/logout: Logout
+ * 	/create-student: Create Student
+ * 	/read-student: Read Student
+ * 	/read-students: Read Students
+ * 	/create-club: Create Club
+ * 	/read-club: Read Club
+ * 	/read-clubs: Read Clubs
+ */
+
+// Login
+// Body: {email: string, password: string, type: string}
 app.post('/login', passport.authenticate('local', {
 	successRedirect: '/home-page',
 	failureRedirect: '/',
 }));
 
+// Logout
 app.get('/logout', (req, res) => {
 	req.logout();
 	res.end();
 });
 
-// API: Create Student
+// Create Student
+// Body: {email: string, password: string, name: string}
 app.post('/create-student', async (req, res) => {
 	const email = req.body['email'];
 	const password = req.body['password'];
@@ -159,7 +214,9 @@ app.post('/create-student', async (req, res) => {
 	res.end();
 });
 
-// API: Read Student
+// Read Student
+// Login Required
+// Query: {email: string}
 app.get('/read-student', isLoggedIn, async (req, res) => {
 	const email = req.query['email'];
 	const student = await readStudent(email);
@@ -173,6 +230,9 @@ app.get('/read-student', isLoggedIn, async (req, res) => {
 	res.end();
 });
 
+// Read Students
+// Login Required
+// Query: {searchFor: string}
 app.get('/read-students', isLoggedIn, async (req, res) => {
 	const searchFor = req.query['searchFor'];
 	const students = await readStudents(searchFor);
@@ -181,7 +241,8 @@ app.get('/read-students', isLoggedIn, async (req, res) => {
 	res.end();
 });
 
-// API: Create Club
+// Create Club
+// Body: {email: string, password: string, name: string}
 app.post('/create-club', async (req, res) => {
 	const email = req.body['email'];
 	const password = req.body['password'];
@@ -196,7 +257,9 @@ app.post('/create-club', async (req, res) => {
 	res.end();
 });
 
-// API: Read Club
+// Read Club
+// Login Required
+// Query: {email: string}
 app.get('/read-club', isLoggedIn, async (req, res) => {
 	const email = req.query['email'];
 	const club = await readClub(email);
@@ -210,6 +273,9 @@ app.get('/read-club', isLoggedIn, async (req, res) => {
 	res.end();
 });
 
+// Read Clubs
+// Login Required
+// Query: {searchFor: string}
 app.get('/read-clubs', isLoggedIn, async (req, res) => {
 	const searchFor = req.query['searchFor'];
 	const clubs = await readClubs(searchFor);
@@ -218,7 +284,9 @@ app.get('/read-clubs', isLoggedIn, async (req, res) => {
 	res.end();
 })
 
-// API: Create Post
+// Create Post
+// Login Required
+// Body: {text: string}
 app.post('/create-post', isLoggedIn, async (req, res) => {
 	const email = req.user['email'];
 	const type = req.user['type'];
@@ -233,6 +301,9 @@ app.post('/create-post', isLoggedIn, async (req, res) => {
 	res.end();
 });
 
+// Read Posts
+// Login Required
+// Query: {email: string, type: string}
 app.get('/read-posts', isLoggedIn, async (req, res) => {
 	const email = req.query['email'];
 	const type = req.query['type'];
@@ -242,6 +313,9 @@ app.get('/read-posts', isLoggedIn, async (req, res) => {
 	res.end();
 });
 
+// Update Post
+// Login Required
+// Body: {postID: string, text: string}
 app.post('/update-post', isLoggedIn, async (req, res) => {
 	const postID = req.body['postID'];
 	const text = req.body['text'];
@@ -256,151 +330,10 @@ app.post('/update-post', isLoggedIn, async (req, res) => {
 	res.end();
 });
 
+// Delete Post
+// Login Required
 app.post('/delete-post', isLoggedIn, async (req, res) => {
 	res.end();
-});
-
-// OUTDATED ROUTES
-
-app.get('/page', (req, res) => {
-	utils.redirect(req, res);
-	res.sendStatus(200);
-	res.end;
-});
-
-app.post('/student/new', (req, res) => {
-	utils.add_new_student(req, res);
-	res.sendStatus(200);
-	res.end;
-});
-
-app.post('/student/friend/add', (req, res) => {
-	utils.add_friend(req, res);
-	res.sendStatus(200);
-	res.end;
-});
-
-app.post('/student/friend/delete', (req, res) => {
-	utils.delete_friend(req, res);
-	res.sendStatus(200);
-	res.end;
-});
-
-app.post('/club/new', (req, res) => {
-	res.sendStatus(200)
-	res.end;
-});
-
-app.get('/club/types', (req, res) => {
-	res.send([
-		"Finance",
-		"Engineering",
-		"Athletic"
-	])
-	res.end;
-});
-
-app.get('/clubs', (req, res) => {
-	res.send([
-		{
-			clubName: 'The Gary & Dang Club',
-			clubDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.'
-		}
-	])
-});
-
-app.post('/club/member/add', (req, res) => {
-	res.sendStatus(200);
-	res.end;
-});
-
-app.post('/club/member/delete', (req, res) => {
-	res.sendStatus(200);
-	res.end;
-});
-
-app.post('/club/like/update', (req, res) => {
-	utils.update_like(req, res);
-	res.sendStatus(200);
-	res.end;
-});
-
-app.get('/club/like/get', (req, res) => {
-	utils.get_like(req, res);
-	res.sendStatus(200);
-	res.end;
-});
-
-app.post('/club/info/update', (req, res) => {
-	utils.update_club_info(req, res);
-	res.sendStatus(200);
-	res.end;
-});
-
-app.post('/club/description/update', (req, res) => {
-	utils.update_club_description(req, res);
-	res.sendStatus(200);
-	res.end;
-});
-
-app.get('/student/info', (req, res) => {
-	res.send(JSON.stringify({
-		name: 'Gary Szekely',
-		bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.',
-		totalClubs: 2,
-		totalPosts: 2,
-		joined: 'Oct 2021',
-		clubs: [
-			"The Gary & Dang Club"
-		],
-		friends: [],
-		posts: [
-			{
-				name: 'Gary Szekely',
-				text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.',
-				timestamp: 'October 21, 2021 at 10:03 AM',
-				comments: []
-			},
-			{
-				name: 'Gary Szekely',
-				text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.',
-				timestamp: 'October 20, 2021 at 7:54 PM',
-				comments: []
-			}
-		]
-	}))
-	res.end;
-});
-
-app.get('/club/info', (req, res) => {
-	res.send(JSON.stringify({
-		clubName: 'The Gary & Dang Club',
-		clubDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.',
-		totalMembers: 2,
-		totalPosts: 2,
-		totalLikes: 100,
-		created: 'Oct 2021',
-		joined: 'Oct 2021',
-		posts: [
-			{
-				clubName: 'The Gary & Dang Club',
-				text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.',
-				timestamp: 'October 21, 2021 at 10:03 AM',
-				comments: []
-			},
-			{
-				clubName: 'The Gary & Dang Club',
-				text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget ultrices nibh. Proin sit amet velit cursus, bibendum mi congue, lacinia ipsum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum porta quam eu enim vestibulum, eu posuere dui imperdiet.',
-				timestamp: 'October 20, 2021 at 7:54 PM',
-				comments: []
-			}
-		],
-		members: [
-			"Gary Szekely", 
-			"Dang Le Nguyen"
-		],
-	}))
-	res.end;
 });
 
 app.listen(process.env.PORT || 3000);

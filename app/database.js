@@ -2,8 +2,17 @@
 
 import { MongoClient, ObjectId } from 'mongodb';
 
+// MongoDB configuration
 const uri = 'mongodb+srv://admin:pwd@teamdaletcluster.3ramk.mongodb.net?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
+
+/**
+ * Authentication
+ * 
+ * Overview:
+ * 	authenticateStudent(email: string, password: string): boolean
+ * 	authenticateClub(email: string, password: string): boolean
+ */
 
 // authenticateStudent(email: string, password: string): boolean
 export async function authenticateStudent(email, password) {
@@ -45,7 +54,15 @@ export async function authenticateClub(email, password) {
 	return true;
 }
 
-// CRUD Operations for Students
+/**
+ * CRUD Operations for Students
+ * 
+ * Overview:
+ * 	createStudent(email: string, password: string, name: string): boolean
+ * 	readStudent(email: string): Student
+ * 	readStudents(searchFor: string): Student[]
+ * 	updateStudent(email: string):
+ */ 
 
 // createStudent(email: string, password: string, name: string): boolean
 export async function createStudent(email, password, name) {
@@ -99,11 +116,20 @@ export async function readStudents(searchFor) {
 	return searchedStudents;
 }
 
+// updateStudent(email: string):
 export async function updateStudent(email) {
 
 }
 
-// CRUD Operations for Clubs
+/**
+ * CRUD Operations for Clubs
+ * 
+ * Overview:
+ * 	createClub(email: string, password: string, name: string): boolean
+ * 	readClub(email: string): Student
+ * 	readClubs(searchFor: string): Student[]
+ * 	updateClub(email: string):
+ */ 
 
 // createClub(email: string, password: string, name: string): boolean
 export async function createClub(email, password, name) {
@@ -135,6 +161,7 @@ export async function createClub(email, password, name) {
 	return true;
 }
 
+// readClub(email: string): Club
 export async function readClub(email) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -146,6 +173,7 @@ export async function readClub(email) {
 	return club;
 }
 
+// readClubs(searchFor: string): Club[]
 export async function readClubs(searchFor) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -162,9 +190,16 @@ export async function updateClub(email) {
 
 }
 
+/**
+ * CRUD Operations for Posts
+ * 
+ * Overview:
+ * 	createPost(email: string, name: string. type: string, text: string, timestamp: Date): boolean
+ * 	readPosts(email: string, type: string): Post[]
+ * 	updatePost(postID: string, text: string, timestamp: Date): boolean
+ */
 
-
-// CRUD Operations for Posts
+// createPost(email: string, name: string. type: string, text: string, timestamp: Date): boolean
 export async function createPost(email, name, type, text, timestamp) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -191,6 +226,7 @@ export async function createPost(email, name, type, text, timestamp) {
 	return false;
 }
 
+// readPosts(email: string, type: string): Post[]
 export async function readPosts(email, type) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -221,6 +257,7 @@ export async function readPosts(email, type) {
 	return [];
 }
 
+// updatePost(postID: string, text: string, timestamp: Date): boolean
 export async function updatePost(postID, text, timestamp) {
 	await client.connect();
 	const database = client.db('club_connect_db');
