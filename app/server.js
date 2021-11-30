@@ -111,7 +111,7 @@ app.get('/profile-page', isLoggedIn, (req, res) => {
 	}
 });
 
-// Routing: Find Clubs Page
+// Routing: Find Friends/Clubs Page
 app.get('/find-friends-clubs', isLoggedIn, (req, res) => {
 	const userType = req.user['type'];
 
@@ -122,6 +122,7 @@ app.get('/find-friends-clubs', isLoggedIn, (req, res) => {
 	}
 });
 
+// Routing: Find Members Page
 app.get('/find-members', isLoggedIn, (req, res) => {
 	const userType = req.user['type'];
 

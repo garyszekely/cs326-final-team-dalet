@@ -5,6 +5,7 @@ import { MongoClient, ObjectId } from 'mongodb';
 const uri = 'mongodb+srv://admin:pwd@teamdaletcluster.3ramk.mongodb.net?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
 
+// authenticateStudent(email: string, password: string): boolean
 export async function authenticateStudent(email, password) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -24,6 +25,7 @@ export async function authenticateStudent(email, password) {
 	return true;
 }
 
+// authenticateClub(email: string, password: string): boolean
 export async function authenticateClub(email, password) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -44,6 +46,8 @@ export async function authenticateClub(email, password) {
 }
 
 // CRUD Operations for Students
+
+// createStudent(email: string, password: string, name: string): boolean
 export async function createStudent(email, password, name) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -70,6 +74,7 @@ export async function createStudent(email, password, name) {
 	return true;
 }
 
+// readStudent(email: string): Student
 export async function readStudent(email) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -81,6 +86,7 @@ export async function readStudent(email) {
 	return student;
 }
 
+// readStudents(searchFor: string): Student[]
 export async function readStudents(searchFor) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -98,6 +104,8 @@ export async function updateStudent(email) {
 }
 
 // CRUD Operations for Clubs
+
+// createClub(email: string, password: string, name: string): boolean
 export async function createClub(email, password, name) {
 	await client.connect();
 	const database = client.db('club_connect_db');
