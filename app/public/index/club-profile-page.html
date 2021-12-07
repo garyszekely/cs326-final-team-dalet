@@ -25,19 +25,19 @@
             </ul>
             <button id="logout-btn" class="btn btn-danger">Logout</button>
         </nav>
-        <div class="main-container">
-            <div class="profile-container">
-                <div class="profile-header-container">
-                    <div class="profile-picture-container">
-                        <img width="150px" height="150x" id="profile-picture" src="index/images/default.jpg" />
+        <div id="main-container">
+            <div id="profile-container">
+                <div id="profile-header-container">
+                    <div id="profile-picture-container">
+                        <img id="picture" width="150px" height="150x" src="index/images/default.jpg" />
                     </div>
-                    <div class="name-bio-container">
+                    <div id="profile-name-bio-container">
                         <h1 id="name"></h1>
-                        <p id="profile-bio"></p>
+                        <p id="bio"></p>
                     </div>
                 </div>
-                <div class="profile-main-container">
-                    <div class="profile-sidebar-container">
+                <div id="profile-main-container">
+                    <div id="profile-sidebar-container">
                         <h4>Total Members</h4>
                         <h5 id="total-members"></h5>
                         <hr>
@@ -50,11 +50,11 @@
                         <h4>Joined</h4>
                         <h5 id="joined"></h5>
                     </div>
-                    <div id="posts" class="feed-container"></div>
+                    <div id="posts"></div>
                 </div>
             </div>
-            <div class="sidebar-container">
-                <div class="controls-container">
+            <div id="sidebar-container">
+                <div id="controls-container">
                     <button id="join-club-btn" class="btn btn-primary">Join Club</button>
                     <button id="like-club-btn" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
@@ -66,7 +66,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="clubs-container">
+                <div id="clubs-members-container">
                     <h3 id="sidebar-header">Members</h3>
                     <hr>
                     <ul id="members"></ul>

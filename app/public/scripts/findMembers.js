@@ -1,7 +1,11 @@
+// Get search-form form element
 const searchForm = document.getElementById('search-form');
+
+// On searchForm submit
 searchForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    // Get results div element
     const results = document.getElementById('results');
     results.innerHTML = null;
 
@@ -24,17 +28,24 @@ searchForm.addEventListener('submit', async (event) => {
             card.appendChild(cardBody);
             results.appendChild(card);
 
+            // On card click
             card.addEventListener('click', async () => {
                 localStorage.setItem('profileEmail', student.email);
                 window.location.href = '/profile-page?type=student';
             });
+
+            // On card mouse over
+            card.addEventListener('mouseover', () => {
+                card.style.cursor = 'pointer';
+            });
         }
     } else {
-        results.innerHTML = 'No Results'
+        results.innerHTML = 'No Results';
     }
 });
 
-document.getElementById('logout=btn').addEventListener('click', async () => {
+// On logout-btn button click
+document.getElementById('logout-btn').addEventListener('click', async () => {
     await fetch('/logout');
     window.location.href = '/';
 });

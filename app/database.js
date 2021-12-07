@@ -1,10 +1,14 @@
 'use strict';
 
 import { MongoClient, ObjectId } from 'mongodb';
+import { MiniCrypt } from './miniCrypt.js';
 
 // MongoDB configuration
 const uri = 'mongodb+srv://admin:pwd@teamdaletcluster.3ramk.mongodb.net?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
+
+// MiniCrypt configuration
+const mc = new MiniCrypt();
 
 /**
  * Authentication
@@ -21,8 +25,7 @@ export async function authenticateStudent(email, password) {
 
 	const students = database.collection('students');
 	const student = await students.findOne({
-		'email': email,
-		'password': password
+		'email': email
 	});
 
 	await client.close();
@@ -31,7 +34,7 @@ export async function authenticateStudent(email, password) {
 		return false;
 	}
 
-	return true;
+	return mc.check(password, student['salt'], student['hash']);
 }
 
 // authenticateClub(email: string, password: string): boolean
@@ -41,8 +44,7 @@ export async function authenticateClub(email, password) {
 
 	const clubs = database.collection('clubs');
 	const club = await clubs.findOne({
-		'email': email,
-		'password': password
+		'email': email
 	});
 
 	await client.close();
@@ -51,7 +53,7 @@ export async function authenticateClub(email, password) {
 		return false;
 	}
 
-	return true;
+	return mc.check(password, club['salt'], club['hash']);
 }
 
 /**
@@ -75,9 +77,12 @@ export async function createStudent(email, password, name) {
 		return false;
 	}
 
+	const [salt, hash] = mc.hash(password);
+
 	const student = {
 		'email': email,
-		'password': password,
+		'salt': salt,
+		'hash': hash,
 		'name': name,
 		'bio': 'No Bio',
 		'joined': new Date().toLocaleDateString('en-US', {month: 'short', year: 'numeric'}),
@@ -142,9 +147,12 @@ export async function createClub(email, password, name) {
 		return false;
 	}
 
+	const [salt, hash] = mc.hash(password);
+
 	const club = {
 		'email': email,
-		'password': password,
+		'salt': salt,
+		'hash': hash,
 		'name': name,
 		'bio': 'No Bio',
 		'totalLikes': 0,
