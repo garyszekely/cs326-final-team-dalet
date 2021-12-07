@@ -1,4 +1,4 @@
-async function getStudentPersonalPage() {
+window.addEventListener('load', async () => {
     const res = await fetch('/read-student');
     const data = await res.json();
 
@@ -25,4 +25,4 @@ async function getStudentPersonalPage() {
         e.innerHTML = friend;
         document.getElementById('friend-list').appendChild(e);
     }
-}
+});
