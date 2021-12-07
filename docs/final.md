@@ -26,8 +26,8 @@
 
 
 ## URL Routes / Mapping
-| URL                      | Description | 
-|--------------------------|--------------|
+| URL                      | Description                             | 
+|--------------------------|-----------------------------------------|
 | /landingpage.html        | Used for Logging into existing accounts |
 
 

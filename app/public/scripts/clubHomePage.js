@@ -9,7 +9,6 @@ window.addEventListener('load', async () => {
     document.getElementById('location').innerHTML = 'Location' + data.location;
     document.getElementById('club-description').innerHTML = data.bio;
     
-    //search
-    
+
 
 });
