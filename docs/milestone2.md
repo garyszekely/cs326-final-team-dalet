@@ -91,7 +91,7 @@ The READ operation /club/info can retrieves some information to be shown to the 
 The above club view of their member's profile pages utilizes an example of a DELETE operation when the user clicks "Remove Member" which updates the clubs members to remove that specified member. The interface also utilizes READ operations by reading all the information from /student/info to display on the page.
 
 ### Club Home Page
-![Club Home Page Image](html-and-css/ClubHomePage2.png "Club Home Page")
+![Club Home Page Image](html-and-css/ClubHomePage.png "Club Home Page")
 /club/like/update is an UPDATE operation that increase the like count. /club/info/update and /club/description/update are UPDATE operations that changes club info and club descriptions respectively.
 
 ## Part 3: Deployment

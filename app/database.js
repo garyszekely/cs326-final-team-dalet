@@ -198,6 +198,43 @@ export async function updateClub(email) {
 
 }
 
+export async function updateClubInfo(email, name, meet, contac, place) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+	const clubs = database.collection('clubs');
+
+	clubs.update(
+		{"email": email},
+		{
+		  $set: {
+			"name": name,
+			"meeting": meet,
+			"contact": contac,
+			"location": place
+		  }
+		}
+	  );
+
+	await client.close();
+}
+
+export async function updateClubDesc(email, desc) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+	const clubs = database.collection('clubs');
+
+	clubs.update(
+		{"email": email},
+		{
+		  $set: {
+			"bio": desc
+		  }
+		}
+	  );
+
+	await client.close();
+}
+
 /**
  * CRUD Operations for Posts
  * 

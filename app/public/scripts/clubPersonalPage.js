@@ -1,12 +1,12 @@
-async function getClubPersonalPage() {
+window.addEventListener('load', async () => {
     const res = await fetch('/read-club');
     const data = await res.json();
 
     document.getElementById('club-name').innerHTML = data.clubName;
     document.getElementById('meeting').innerHTML = data.meeting;
-    document.getElementById('contact-info').innerHTML = data.contact;
+    document.getElementById('contact').innerHTML = data.contact;
     document.getElementById('location').innerHTML = data.location;
-    document.getElementById('club-description').innerHTML = data.bio;
+    document.getElementById('desc').innerHTML = data.bio;
 
     document.getElementById('members-list').innerHTML = '';
     for (let member of data.members) {
@@ -14,4 +14,19 @@ async function getClubPersonalPage() {
         e.innerHTML = member;
         document.getElementById('members-list').appendChild(e);
     }
-}
+});
+
+document.getElementById('club-info-edit').addEventListener('click', () => {
+    updateClubInfo(localStorage.getItem('profileEmail'), 
+    document.getElementById('club-name').innerHTML,
+    document.getElementById('meeting').innerHTML,
+    document.getElementById('contact').innerHTML,
+    document.getElementById('location').innerHTML);
+    window.location.href = '/personal-page';
+});
+
+document.getElementById('club-desc-edit').addEventListener('click', () => {
+    updateClubDesc(localStorage.getItem('profileEmail'), 
+    document.getElementById('desc').innerHTML)
+    window.location.href = '/personal-page';
+});
