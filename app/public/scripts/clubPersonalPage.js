@@ -30,3 +30,9 @@ document.getElementById('club-desc-edit').addEventListener('click', () => {
     document.getElementById('desc').innerHTML)
     window.location.href = '/personal-page';
 });
+
+// On logout-btn button click
+document.getElementById('logout-btn').addEventListener('click', async () => {
+    await fetch('/logout');
+    window.location.href = '/';
+});

@@ -8,5 +8,10 @@ window.addEventListener('load', async () => {
         e.innerHTML = club.name + ' ' + club.meeting;
         document.getElementById('schedule').appendChild(e);
     }
-    
+});
+
+// On logout-btn button click
+document.getElementById('logout-btn').addEventListener('click', async () => {
+    await fetch('/logout');
+    window.location.href = '/';
 });

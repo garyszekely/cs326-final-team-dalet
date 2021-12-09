@@ -1,21 +1,31 @@
-.main-container {
-    width: 100vw;
-    height: 65vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    background-color: #F0F2F5;
+.navbar {
+    background-color: green; 
+    height: 10vh;
 }
 
-.footer-container {
+.nav-link {
+    color: white;
+    font-size: 15pt;
+}
+
+.nav-link:hover {
+    color: white;
+    font-weight: bold;
+}
+
+.navbar-brand {
+    font-family: Lobster; 
+    color: white; 
+    font-size: 25pt; 
+    width: 15%; 
+    text-align: center;
+}
+
+.main-container {
     width: 100vw;
-    height: 10vh;
+    height: 90vh;
+    background-color: #F0F2F5;
     display: flex;
-    align-items: center;
-    padding-left: 10px;
-    color: #F0F2F5;
-    background-color: green;
 }
 
 #club-search-btn {

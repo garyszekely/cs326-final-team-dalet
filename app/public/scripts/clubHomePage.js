@@ -8,7 +8,10 @@ window.addEventListener('load', async () => {
     document.getElementById('contact-info').innerHTML = 'Contact' + data.contact;
     document.getElementById('location').innerHTML = 'Location' + data.location;
     document.getElementById('club-description').innerHTML = data.bio;
-    
+});
 
-
+// On logout-btn button click
+document.getElementById('logout-btn').addEventListener('click', async () => {
+    await fetch('/logout');
+    window.location.href = '/';
 });
