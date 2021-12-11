@@ -12,13 +12,9 @@ const mc = new MiniCrypt();
 
 /**
  * Authentication
- * 
- * Overview:
- * 	authenticateStudent(email: string, password: string): boolean
- * 	authenticateClub(email: string, password: string): boolean
  */
 
-// authenticateStudent(email: string, password: string): boolean
+// authenticateStudent(email: String, password: String): boolean
 export async function authenticateStudent(email, password) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -37,7 +33,7 @@ export async function authenticateStudent(email, password) {
 	return mc.check(password, student['salt'], student['hash']);
 }
 
-// authenticateClub(email: string, password: string): boolean
+// authenticateClub(email: String, password: String): boolean
 export async function authenticateClub(email, password) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -58,15 +54,9 @@ export async function authenticateClub(email, password) {
 
 /**
  * CRUD Operations for Students
- * 
- * Overview:
- * 	createStudent(email: string, password: string, name: string): boolean
- * 	readStudent(email: string): Student
- * 	readStudents(searchFor: string): Student[]
- * 	updateStudent(email: string):
  */ 
 
-// createStudent(email: string, password: string, name: string): boolean
+// createStudent(email: String, password: String, name: String): boolean
 export async function createStudent(email, password, name) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -96,7 +86,7 @@ export async function createStudent(email, password, name) {
 	return true;
 }
 
-// readStudent(email: string): Student
+// readStudent(email: String): Student
 export async function readStudent(email) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -108,7 +98,7 @@ export async function readStudent(email) {
 	return student;
 }
 
-// readStudents(searchFor: string): Student[]
+// readStudents(searchFor: String): Student[]
 export async function readStudents(searchFor) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -121,12 +111,34 @@ export async function readStudents(searchFor) {
 	return searchedStudents;
 }
 
-// updateStudent(email: string):
+// readMembers(email: String, searchFor: String): Student[]
+export async function readMembers(email, searchFor) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const clubs = database.collection('clubs');
+	const students = database.collection('students');
+
+	const club = await clubs.findOne({'email': email});
+	const searchedMembers = [];
+	console.log(club['members'])
+	for(let member of club['members']) {
+		console.log(member)
+		console.log(searchFor)
+		console.log(member.includes(searchFor))
+		if (member.includes(searchFor)) {
+			searchedMembers.push(await students.findOne({'name': member}));
+		}
+	}
+	console.log(searchedMembers)
+	return searchedMembers;
+}
+
 export async function updateStudent(email) {
 
 }
 
-// isFriend(userEmail: string, profileEmail: string) => boolean
+// isFriend(userEmail: String, profileEmail: String) => boolean
 export async function isFriend(userEmail, profileEmail) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -140,6 +152,7 @@ export async function isFriend(userEmail, profileEmail) {
 	});
 }
 
+// addFriend(userEmail: String, profileEmail: String) => boolean
 export async function addFriend(userEmail, profileEmail) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -154,6 +167,7 @@ export async function addFriend(userEmail, profileEmail) {
 	return true;
 }
 
+// removeFriend(userEmail: String, profileEmail: String) => boolean
 export async function removeFriend(userEmail, profileEmail) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -168,6 +182,7 @@ export async function removeFriend(userEmail, profileEmail) {
 	return true;
 }
 
+// isMember(userEmail: String, profileEmail: String) => boolean
 export async function isMember(userEmail, profileEmail) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -183,6 +198,7 @@ export async function isMember(userEmail, profileEmail) {
 	});
 }
 
+// joinClub(userEmail: String, profileEmail: String) => boolean
 export async function joinClub(userEmail, profileEmail) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -199,6 +215,7 @@ export async function joinClub(userEmail, profileEmail) {
 	return true;
 }
 
+// leaveClub(userEmail: String, profileEmail: String) => boolean
 export async function leaveClub(userEmail, profileEmail) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -215,6 +232,7 @@ export async function leaveClub(userEmail, profileEmail) {
 	return true;
 }
 
+// likeClub(email: String) => boolean
 export async function likeClub(email) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -227,15 +245,9 @@ export async function likeClub(email) {
 
 /**
  * CRUD Operations for Clubs
- * 
- * Overview:
- * 	createClub(email: string, password: string, name: string): boolean
- * 	readClub(email: string): Student
- * 	readClubs(searchFor: string): Student[]
- * 	updateClub(email: string):
  */ 
 
-// createClub(email: string, password: string, name: string): boolean
+// createClub(email: String, password: String, name: String): boolean
 export async function createClub(email, password, name) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -268,7 +280,7 @@ export async function createClub(email, password, name) {
 	return true;
 }
 
-// readClub(email: string): Club
+// readClub(email: String): Club
 export async function readClub(email) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -280,7 +292,7 @@ export async function readClub(email) {
 	return club;
 }
 
-// readClubs(searchFor: string): Club[]
+// readClubs(searchFor: String): Club[]
 export async function readClubs(searchFor) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -297,16 +309,18 @@ export async function updateClub(email) {
 
 }
 
+// removeMember(userEmail: String, profileEmail: String): boolean
 export async function removeMember(userEmail, profileEmail) {
 	await client.connect();
 	const database = client.db('club_connect_db');
 
 	const clubs = database.collection('clubs');
+	const students = database.collection('students');
 	const user = await clubs.findOne({'email': userEmail});
-	const profile = await clubs.findOne({'email': profileEmail});
+	const profile = await students.findOne({'email': profileEmail});
 
-	await clubs.updateOne({'email': userEmail}, {$pull: {'members': profile['_id']}});
-	await clubs.updateOne({'email': profileEmail}, {$pull: {'clubs': user['name']}});
+	await clubs.updateOne({'email': userEmail}, {$pull: {'members': profile['name']}});
+	await students.updateOne({'email': profileEmail}, {$pull: {'clubs': user['name']}});
 
 	return true;
 }
@@ -352,12 +366,12 @@ export async function updateClubDesc(email, desc) {
  * CRUD Operations for Posts
  * 
  * Overview:
- * 	createPost(email: string, name: string. type: string, text: string, timestamp: Date): boolean
- * 	readPosts(email: string, type: string): Post[]
- * 	updatePost(postID: string, text: string, timestamp: Date): boolean
+ * 	createPost(email: String, name: String. type: String, text: String, timestamp: Date): boolean
+ * 	readPosts(email: String, type: String): Post[]
+ * 	updatePost(postID: String, text: String, timestamp: Date): boolean
  */
 
-// createPost(email: string, name: string. type: string, text: string, timestamp: Date): boolean
+// createPost(email: String, name: String. type: String, text: String, timestamp: Date): boolean
 export async function createPost(email, name, type, text, timestamp) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -384,7 +398,7 @@ export async function createPost(email, name, type, text, timestamp) {
 	return false;
 }
 
-// readPosts(email: string, type: string): Post[]
+// readPosts(email: String, type: String): Post[]
 export async function readPosts(email, type) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -415,7 +429,7 @@ export async function readPosts(email, type) {
 	return [];
 }
 
-// updatePost(postID: string, text: string, timestamp: Date): boolean
+// updatePost(postID: String, text: String, timestamp: Date): boolean
 export async function updatePost(postID, text, timestamp) {
 	await client.connect();
 	const database = client.db('club_connect_db');
@@ -427,12 +441,6 @@ export async function updatePost(postID, text, timestamp) {
 	});
 	return true;
 }
-
-/*
-export async function deletePost(username, postID) {
-
-}
-*/
 
 //collection is "students" or "clubs"
 export async function deleteClubPost(email, timestamp, collection) {

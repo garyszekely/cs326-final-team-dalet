@@ -84,7 +84,7 @@ window.addEventListener('load', async () => {
 
             leaveClubBtn.addEventListener('click', async () => {
                 await fetch('/leave-club?email=' + email);
-                window.location.href = window.location.href;
+                window.location.reload();
             })
 
             controlsContainer.appendChild(leaveClubBtn);
@@ -97,7 +97,7 @@ window.addEventListener('load', async () => {
 
             joinClubBtn.addEventListener('click', async () => {
                 await fetch('/join-club?email=' + email);
-                window.location.href = window.location.href;
+                window.location.reload();
             })
 
             controlsContainer.appendChild(joinClubBtn);
@@ -113,6 +113,7 @@ window.addEventListener('load', async () => {
 
     likeClubBtn.addEventListener('click', async () => {
         await fetch('/like-club?email=' + email);
+        window.location.reload();
     })
 
     controlsContainer.appendChild(likeClubBtn);

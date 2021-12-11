@@ -7,29 +7,13 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import dotenv from 'dotenv';
 import { 
 	authenticateStudent, authenticateClub, 
-	createStudent, readStudent, readStudents, isFriend, addFriend, removeFriend, isMember, joinClub, leaveClub, likeClub,
+	createStudent, readStudent, readStudents, readMembers, isFriend, addFriend, removeFriend, isMember, joinClub, leaveClub, likeClub,
 	createClub, readClub, readClubs, removeMember,
 	createPost, readPosts, updatePost,  
 } from './database.js';
 
 /**
  * Initialization
- * 
- * Overview:
- * 	Create App with Express
- * 	Use LocalStrategy with Passport
- * 	App Configuration:
- * 		Use expressSession
- * 		Use urlencoded
- * 		Use static 'app/public'
- * 		Use passport initialize
- * 		Use passport session
- *	Passport Configuratuon:
- *		Serialize user
- *		Deserialize user
- *		Use isLoggedIn
- *	Environment Configuration:
- *		Use config
  */
 
 // Create app with Express
@@ -93,14 +77,6 @@ dotenv.config();
 
 /**
  * Routing
- * 
- * Overview:
- * 	/: Landing Page
- * 	/home-page: Home Page
- * 	/personal-page: Personal Page
- * 	/profile-page: Profile Page
- * 	/find-friends-clubs: Find Friends Clubs Page
- * 	/find-members: Find Members
  */
 
 // Landing Page
@@ -178,28 +154,58 @@ app.get('/find-members', isLoggedIn, (req, res) => {
 
 /**
  * API
- * 
- * Overview:
- * 	/login: Login
- * 	/logout: Logout
- * 	/create-student: Create Student
- * 	/read-student: Read Student
- * 	/read-students: Read Students
- * 	/create-club: Create Club
- * 	/read-club: Read Club
- * 	/read-clubs: Read Clubs
  */
 
-// Login
-// Body: {email: string, password: string, type: string}
 app.post('/login', passport.authenticate('local', {
 	successRedirect: '/home-page',
 	failureRedirect: '/',
 }));
 
-// Logout
 app.get('/logout', (req, res) => {
 	req.logout();
+	res.end();
+});
+
+app.post('/create-student', async (req, res) => {
+	const email = req.body['email'];
+	const password = req.body['password'];
+	const name = req.body['name'];
+
+	if (await createStudent(email, password, name)) {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(400);
+	}
+	res.end();
+});
+
+app.get('/read-student', isLoggedIn, async (req, res) => {
+	const email = req.query['email'];
+	const student = await readStudent(email);
+
+	if (student !== null) {
+		res.send(JSON.stringify(student))
+	} else {
+		res.sendStatus(400);
+	}
+
+	res.end();
+});
+
+app.get('/read-students', isLoggedIn, async (req, res) => {
+	const searchFor = req.query['searchFor'];
+	const students = await readStudents(searchFor);
+
+	res.send(JSON.stringify(students));
+	res.end();
+});
+
+app.get('/read-members', isLoggedIn, async (req, res) => {
+	const email = req.user['email'];
+	const searchFor = req.query['searchFor'];
+	const members = await readMembers(email, searchFor);
+
+	res.send(JSON.stringify(members));
 	res.end();
 });
 
@@ -278,50 +284,6 @@ app.get('/like-club', isLoggedIn, async (req, res) => {
 	res.end();
 });
 
-// Create Student
-// Body: {email: string, password: string, name: string}
-app.post('/create-student', async (req, res) => {
-	const email = req.body['email'];
-	const password = req.body['password'];
-	const name = req.body['name'];
-
-	if (await createStudent(email, password, name)) {
-		res.sendStatus(200);
-	} else {
-		res.sendStatus(400);
-	}
-	res.end();
-});
-
-// Read Student
-// Login Required
-// Query: {email: string}
-app.get('/read-student', isLoggedIn, async (req, res) => {
-	const email = req.query['email'];
-	const student = await readStudent(email);
-
-	if (student !== null) {
-		res.send(JSON.stringify(student))
-	} else {
-		res.sendStatus(400);
-	}
-
-	res.end();
-});
-
-// Read Students
-// Login Required
-// Query: {searchFor: string}
-app.get('/read-students', isLoggedIn, async (req, res) => {
-	const searchFor = req.query['searchFor'];
-	const students = await readStudents(searchFor);
-
-	res.send(JSON.stringify(students));
-	res.end();
-});
-
-// Create Club
-// Body: {email: string, password: string, name: string}
 app.post('/create-club', async (req, res) => {
 	const email = req.body['email'];
 	const password = req.body['password'];
@@ -336,9 +298,6 @@ app.post('/create-club', async (req, res) => {
 	res.end();
 });
 
-// Read Club
-// Login Required
-// Query: {email: string}
 app.get('/read-club', isLoggedIn, async (req, res) => {
 	const email = req.query['email'];
 	const club = await readClub(email);
@@ -352,9 +311,6 @@ app.get('/read-club', isLoggedIn, async (req, res) => {
 	res.end();
 });
 
-// Read Clubs
-// Login Required
-// Query: {searchFor: string}
 app.get('/read-clubs', isLoggedIn, async (req, res) => {
 	const searchFor = req.query['searchFor'];
 	const clubs = await readClubs(searchFor);
@@ -373,11 +329,8 @@ app.get('/remove-member', isLoggedIn, async (req, res) => {
 		res.sendStatus(400);
 	}
 	res.end();
-})
+});
 
-// Create Post
-// Login Required
-// Body: {text: string}
 app.post('/create-post', isLoggedIn, async (req, res) => {
 	const email = req.user['email'];
 	const type = req.user['type'];
@@ -392,9 +345,6 @@ app.post('/create-post', isLoggedIn, async (req, res) => {
 	res.end();
 });
 
-// Read Posts
-// Login Required
-// Query: {email: string, type: string}
 app.get('/read-posts', isLoggedIn, async (req, res) => {
 	const email = req.query['email'];
 	const type = req.query['type'];
@@ -404,9 +354,6 @@ app.get('/read-posts', isLoggedIn, async (req, res) => {
 	res.end();
 });
 
-// Update Post
-// Login Required
-// Body: {postID: string, text: string}
 app.post('/update-post', isLoggedIn, async (req, res) => {
 	const postID = req.body['postID'];
 	const text = req.body['text'];
@@ -421,8 +368,6 @@ app.post('/update-post', isLoggedIn, async (req, res) => {
 	res.end();
 });
 
-// Delete Post
-// Login Required
 app.post('/delete-post', isLoggedIn, async (req, res) => {
 	res.end();
 });

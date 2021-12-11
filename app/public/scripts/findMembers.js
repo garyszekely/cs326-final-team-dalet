@@ -10,7 +10,7 @@ searchForm.addEventListener('submit', async (event) => {
     results.innerHTML = null;
 
     const searchFor = searchForm.elements['search-for'].value;
-    const students = await (await fetch('/read-students?' + 'searchFor=' + searchFor)).json();
+    const students = await (await fetch('/read-members?' + 'searchFor=' + searchFor)).json();
     if (students.length) {
         for (let student of students) {
             const card = document.createElement('div');

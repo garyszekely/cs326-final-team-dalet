@@ -1,24 +1,22 @@
 'use strict';
 
 window.addEventListener('load', async () => {
-
     const email = localStorage.getItem('profileEmail');
 
     const studentRes = await fetch('/read-student?email=' + email);
     if (studentRes.ok) {
         const student = await studentRes.json();
 
-        document.getElementById('name').innerHTML = student.name;
-        document.getElementById('bio').innerHTML = student.bio;
-        document.getElementById('total-clubs').innerHTML = student.clubs.length;
-        document.getElementById('total-posts').innerHTML = student.posts.length;
-        document.getElementById('joined').innerHTML = student.joined;
+        document.getElementById('name').innerHTML = student['name'];
+        document.getElementById('bio').innerHTML = student['bio'];
+        document.getElementById('total-clubs').innerHTML = student['clubs'].length;
+        document.getElementById('total-posts').innerHTML = student['posts'].length;
+        document.getElementById('joined').innerHTML = student['joined'];
 
-        document.getElementById('clubs').innerHTML = null;
         document.getElementById('posts').innerHTML = null;
 
-        if (student.clubs.length) {
-            for (let club of student.clubs) {
+        if (student['clubs'].length) {
+            for (let club of student['clubs']) {
                 const li = document.createElement('li');
                 li.innerHTML = club;
                 document.getElementById('clubs').appendChild(li);
