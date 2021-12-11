@@ -17,7 +17,7 @@ window.onload = async () => {
 
             leaveClubBtn.addEventListener('click', async () => {
                 await fetch('/leave-club?email=' + email);
-                window.location.href = "/profile-page?type=club"
+                window.location.reload();
             })
 
             controlsContainer.appendChild(leaveClubBtn);
@@ -30,8 +30,7 @@ window.onload = async () => {
 
             joinClubBtn.addEventListener('click', async () => {
                 await fetch('/join-club?email=' + email);
-
-                window.location.href = "/profile-page?type=club"
+                window.location.reload();
             })
 
             controlsContainer.appendChild(joinClubBtn);
