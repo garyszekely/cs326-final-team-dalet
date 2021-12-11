@@ -1,5 +1,6 @@
 window.addEventListener('load', async () => {
-    const res = await fetch('/read-club');
+    const email = localStorage.getItem('profileEmail');
+    const res = await fetch('/read-club?email=' + email);
     const data = await res.json();
 
     document.getElementById('club-name').innerHTML = data.clubName;
