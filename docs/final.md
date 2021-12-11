@@ -1,133 +1,153 @@
-# Team Dalet Club Connect [Fall 2021]
-## Overview
-Our web application connects clubs on campus to individuals in a much more cohesive way. Clubs will be able to sign up and post about themselves and the various things they have to offer while students can browse through and select which clubs they would like to be a part of. This is related to other web applications as it functions like a Facebook Marketplace for clubs. People are able to freely browse from the comfort of their homes, the clubs on campus without feeling rushed or pressured to make a decision.
-Unlike campus pulse where clubs are simply listed alphabetically, our application helps connect students to clubs dynamically by exposing clubs to students through their friends.
+# Team Dalet
+## ClubConnect - Fall 2021
 
-## Team Members
+### Overview
+
+### Team Members
 **Name:** Gary Szekely  
 **GitHub Username:** garyszekely
 
 **Name:** Dang Le Nguyen  
 **GitHub Username:** DanGithub200, Dang592
 
-## Division of Labor
-### Gary Szekely
-- HTML
-    - Landing Page
-    - Landing Page Signup Modals
-    - Profile Interaction Pages
-    - Find Clubs HTML
-- Scripts
-    - Landing Page Script
-    - Profile Interaction Pages Scripts (Club, Club to Member, and Student to Student)
-    - Find Clubs Scripts
-    - APIs associated with above scripts
-- Backend
-    - Landing Page
-    - Find Members Page
-    - Find Friends/Clubs
-    - Club Profile Page
-    - Student Profile
-- Create/Read Operations for Student, Club, and Posts
-- Login/Logout
-- Signup
+### User Interface:
 
-## Dang Le Nguyen
-- HTML
-    - Home Pages
-    - Personal Pages
-    - Find Club Wireframe
-- Scripts
-    - parts of database.js
-    - parts of server.js
-- Backend
-    - Student Home Page
-    - Student Personal Page
-    - Club Home Page
-    - Club Personal Page
+### API:
 
-## User Interface:
+| API Name       | Route           | Description                                            | Parameters                                                           |
+|----------------|-----------------|--------------------------------------------------------|----------------------------------------------------------------------|
+| Login          | /login          | POST, Login to website                                 | BODY: { email: String, password: String, type: 'student' or 'club' } |
+| Logout         | /logout         | GET, Logout of website                                 | None                                                                 |
+| Create Student | /create-student | POST, Signup for students                              | BODY: { email: String, password: String, name: String }              |
+| Read Student   | /read-student   | GET, Read student data                                 | QUERY: { email: String }                                             |
+| Read Students  | /read-students  | GET, Read a batch of students data                     | QUERY: { searchFor: String }                                         |
+| Read Members   | /read-members   | GET, Read a batch of members data                      | QUERY: { searchFor: String }                                         |
+| Is Friend      | /is-friend      | GET, Check if the user and another student are friends | QUERY: { email: String }                                             |
+| Add Friend     | /add-friend     | GET, Add friend for students                           | QUERY: { email: String }                                             |
+| Remove Friend  | /remove-friend  | GET, Remove friend for students                        | QUERY: { email: String }                                             |
+| Is Member      | /is-member      | GET, Check if user is member of club                   | QUERY: { email: String }                                             |
+| Join Club      | /join-club      | GET, Join club for students                            | QUERY: { email: String }                                             |
+| Leave Club     | /leave-club     | GET, Leave club for students                           | QUERY: { email: String }                                             |
+| Like Club      | /like-club      | GET, Like club for students                            | QUERY: { email: String }                                             |
+| Create Club    | /create-club    | POST, Signup for clubs                                 | BODY: { email: String, password: String, name: String }              |
+| Read Club      | /read-club      | GET, Read club data                                    | QUERY: { searchFor: String }                                         |
+| Read Clubs     | /read-clubs     | GET, Read a batch of clubs data                        | QUERY: { searchFor: String }                                         |
+| Remove Member  | /remove-member  | GET, Remove member for clubs                           | QUERY: { email: String }                                             |
+| Create Post    | /create-post    | POST, Create post                                      | BODY: { text: String }                                               |
+| Read Posts     | /read-posts     | GET, Read posts                                        | QUERY: { email: String, type: String }                               |
+| Update Post    | /update-post    | POST, Update a post                                    | BODY: { postID: String, text: String }                               |
 
+### Database:
 
-## URL Routes / Mapping
-| URL                 | Description                                         | 
-|---------------------|-----------------------------------------------------|
-| /                   | goes to landing page                                | 
-| /home-page          | goes to their homepage                              |
-| /personal-page      | goes to their personal page                         |
-| /profile-page       | goes to their profile page                          |
-| /find-friends-clubs | view the clubs of friends                           |
-| /find-members       | for a club, view their members                      |
-| /login              | performs authentication, go to home page or landing |
-| /logout             | exits account                                       |
-| /is-friend          | for students, check if user is a friend             |
-| /add-friend         | for students, add user as friend                    |
-| /remove-friend      | for students, remove user as friend                 |
-| /is-member          |for clubs, check if user is a member of club         |
-| /join-club          | for student, join a club                            |
-| /leave-club         | for student, leave a club                           |
-| /like-club          | give a club a like                                  |
-| /create-student     | create new student user                             |
-| /read-student       | send student's information                          |
-| /read-students      | send multiple students' information                 |
-| /create-club        | create new club user                                |
-| /read-club          | send club's information                             |
-| /read-clubs         | send multiple clubs' information                    |
-| /remove-member      | for clubs, remove a member                          |
-| /create-post        | create a post                                       |
-| /read-posts         | read posts                                          |
-| /update-post        | edit a post                                         |
-| /delete-post        | delete post                                         |
+| Collection Name | Schema                                                                                                                                                                                            |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Students        | _id: ObjectId <br> email: String <br> name: String <br> salt: String <br> hash: String <br> bio: String <br> joined: String <br> friends: ObjectId[] <br> clubs: String[] <br> posts: ObjectId[]  |
+| Clubs           | _id: ObjectId <br> email: String <br> name: String <br> salt: String <br> hash: String <br> bio: String <br> totalLikes: number <br> joined: String <br> members: String[] <br> posts: ObjectId[] |
+| Posts           | _id: ObjectId <br> name: String <br> text: String <br> timestamp: String                                                                                                                          |
 
-## Database:
-### Student Collection
-| Field         | Data Type | Description                   |
-|---------------|-----------|-------------------------------|
-| email         | Text      | Registered email              |
-| password      | Text[]    | Salt & (encoded) password     |
-| name          | Text      | User's name                   |
-| bio           | Text      | User's introduction           |
-| joined        | Date      | User's joined date            |
-| friends       | Text[]    | Users the user friended       |
-| clubs         | Text[]    | Clubs the user joined         |
-| posts         | _id[]     | Posts the user posted         |
+- Students Relationships:
+    - friends: Stores the ObjectId's of the student's friends
+    - clubs: Stores the names of the student's clubs
+    - posts: Stores the ObjectId's of the students's posts
+- Clubs Relationships:
+    - members: Stores the names of the club's members
+    - posts: Stores the ObjectId's of the club's posts
 
-### Club Collection
-| Column        | Data Type | Description                   |
-|---------------|-----------|-------------------------------|
-| email         | Text      | Registered email              |
-| password      | Text[]    | Salt & (encoded) password     |
-| name          | Text      | Club's name                   |
-| bio           | Text      | Club's introduction           |
-| totalLikes    | Int       | Times an user likes the club  |
-| joined        | Date      | User's joined date            |
-| members       | Text[]    | Total number of posts posted  |
-| posts         | _id[]     | Posts the club posted         |
-| meeting       | Text      | When to members meet          |
-| contact       | Text      | Contact club leaders (phone #)|
-| location      | Text      | Location of meeting           |
+### URL Routes / Mapping
 
-### Post Collection
-| Column        | Data Type | Description                   |
-|---------------|-----------|-------------------------------|
-| name          | Text      | Name                          |
-| text          | Text      | The text of the post          |
-| timestamp     | Text      | Time of post                  |
+| Page Name            | Route                      | Description                                                 | Restrictions        |
+|----------------------|----------------------------|-------------------------------------------------------------| --------------------|
+| Landing Page         | /                          | Serves as login and signup page                             | None                |
+| Home Page            | /home-page                 | Serves as entry point to the controls                       | Logged In           |
+| Personal Page        | /personal-page             | Serves as page for user to edit their profile               | Logged In           |
+| Find Friends/Clubs   | /find-friends-clubs        | Serves as page for students to search for friends and clubs | Logged in, Students |
+| Find Members         | /find-members              | Serves as page for clubs to search for their members        | Logged in, Clubs    |
+| Student Profile Page | /profile-page?type=student | Serves as page for students viewing other students profiles | Logged In, Students |
+| Club Profile Page    | /profile-page?type=club    | Serves as page for students viewing clubs profiles          | Logged In, Students |
+| Member Profile Page  | /profile-page?type=member  | Serves as page for clubs viewing their members profiles     | Logged In, Clubs    |
 
+### Authentication
 
-## API
-MongoDB
-Heroku
+We use Passport.js to handle user authentication. Users login/signup on the landing page which uses Passport's Local Strategy to serialize and deserialize the user on login with a username and password. We also use CryptoJS to generate salt and hashes of the password for even more secure authentication. The user is only able to access the Landing Page (route: /landing-page) without logging in. If the user logs in as a student they can access every page but Find Members (route: /find-members). If the user logs in as a club they can access every page but Find Friends/Clubs (route: /find-friends-clubs).
 
-## Authentication
+### Deployment
 
-## Conclusion
-We felt we should have more rigorously planned out our project so that there would be less changes from our vision to the final product, which wasted our time.
-
-## Heroku Link
 https://floating-basin-00309.herokuapp.com/
 
-## Rubric
+### Division of Labor
+- Gary Szekely
+    - UI/Routing (public/index, public/styles, public/scripts, server.js):
+        | Page Name            | Route                      |
+        |----------------------|----------------------------|
+        | Landing Page         | /                          |  
+        | Find Friends/Clubs   | /find-friends-clubs        |
+        | Find Members         | /find-members              |
+        | Student Profile Page | /profile-page?type=student |
+        | Club Profile Page    | /profile-page?type=club    |
+        | Member Profile Page  | /profile-page?type=member  |
 
-## Video
+    - API (server.js):
+        | API Name       | Route           |
+        |----------------|-----------------|
+        | Login          | /login          |
+        | Logout         | /logout         |
+        | Create Student | /create-student |
+        | Read Student   | /read-student   |
+        | Read Students  | /read-students  |
+        | Read Members   | /read-members   |
+        | Is Friend      | /is-friend      |
+        | Add Friend     | /add-friend     |
+        | Remove Friend  | /remove-friend  | 
+        | Is Member      | /is-member      |
+        | Join Club      | /join-club      |
+        | Leave Club     | /leave-club     |
+        | Like Club      | /like-club      |
+        | Create Club    | /create-club    |
+        | Read Club      | /read-club      |
+        | Read Clubs     | /read-clubs     |
+        | Remove Member  | /remove-member  |
+        | Read Posts     | /read-posts     |
+        | Update Post    | /update-post    |
 
+    - Database (database.js): 
+        | Function Name       |
+        |---------------------|
+        | authenticateStudent |
+        | authenticateClub    |
+        | createStudent       |
+        | readStudent         |
+        | readStudents        |
+        | readMembers         |
+        | isFriend            |
+        | addFriend           |
+        | removeFriend        |
+        | isMember            |
+        | joinClub            |
+        | leaveClub           |
+        | likeClub            |
+        | createClub          |
+        | readClub            |
+        | readClubs           |
+        | removeMember        |
+        | readPosts           |
+        | updatePost          |
+
+- Dang Le Nguyen
+    - HTML
+        - Home Pages
+        - Personal Pages
+        - Find Club Wireframe
+    - Scripts
+        - parts of database.js
+        - parts of server.js
+    - Backend
+        - Student Home Page
+        - Student Personal Page
+        - Club Home Page
+        - Club Personal Page
+
+### Conclusion
+
+### Rubric
+
+### Video

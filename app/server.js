@@ -368,8 +368,4 @@ app.post('/update-post', isLoggedIn, async (req, res) => {
 	res.end();
 });
 
-app.post('/delete-post', isLoggedIn, async (req, res) => {
-	res.end();
-});
-
 app.listen(process.env.PORT || 3000);

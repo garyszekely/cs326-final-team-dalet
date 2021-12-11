@@ -134,10 +134,6 @@ export async function readMembers(email, searchFor) {
 	return searchedMembers;
 }
 
-export async function updateStudent(email) {
-
-}
-
 // isFriend(userEmail: String, profileEmail: String) => boolean
 export async function isFriend(userEmail, profileEmail) {
 	await client.connect();
@@ -303,10 +299,6 @@ export async function readClubs(searchFor) {
 
 	await client.close();
 	return searchedClubs;
-}
-
-export async function updateClub(email) {
-
 }
 
 // removeMember(userEmail: String, profileEmail: String): boolean
