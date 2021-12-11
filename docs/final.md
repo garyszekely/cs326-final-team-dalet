@@ -1,7 +1,10 @@
 # Team Dalet
 ## ClubConnect - Fall 2021
 
+
 ### Overview
+
+Our web application allows for students and clubs to interact with one another on a Facebook-like level. Students can befriend each other, join clubs, like clubs and post to name a few actions. Clubs can manage their members as well as post to their wall for their members to view. Our idea is innovative because there does not seem to be a streamlined way to view and join clubs at UMass and this would give students much more easier access to getting involved on campus.
 
 ### Team Members
 **Name:** Gary Szekely  
@@ -10,7 +13,55 @@
 **Name:** Dang Le Nguyen  
 **GitHub Username:** DanGithub200, Dang592
 
-### User Interface:
+
+### User Interface
+
+#### Routes
+
+| Page Name            | Route                      | Description                                                 | Restrictions        |
+|----------------------|----------------------------|-------------------------------------------------------------| --------------------|
+| Landing Page         | /                          | Serves as login and signup page                             | None                |
+| Home Page            | /home-page                 | Serves as entry point to the controls                       | Logged In           |
+| Personal Page        | /personal-page             | Serves as page for user to edit their profile               | Logged In           |
+| Find Friends/Clubs   | /find-friends-clubs        | Serves as page for students to search for friends and clubs | Logged in, Students |
+| Find Members         | /find-members              | Serves as page for clubs to search for their members        | Logged in, Clubs    |
+| Student Profile Page | /profile-page?type=student | Serves as page for students viewing other students profiles | Logged In, Students |
+| Club Profile Page    | /profile-page?type=club    | Serves as page for students viewing clubs profiles          | Logged In, Students |
+| Member Profile Page  | /profile-page?type=member  | Serves as page for clubs viewing their members profiles     | Logged In, Clubs    |
+
+#### Preview
+
+##### Landing Page
+
+![Landing Page 1](final_images/LandingPage1.png "Landing Page 1")
+![Landing Page 2](final_images/LandingPage2.png "Landing Page 2")
+![Landing Page 3](final_images/LandingPage3.png "Landing Page 3")
+
+##### Home Page
+
+##### Personal Page
+
+##### Find Friends/Clubs
+
+![Find Friends/Clubs 1](final_images/FindFriendsClubs1.png "Find Friends/Clubs 1")
+![Find Friends/Clubs 2](final_images/FindFriendsClubs2.png "Find Friends/Clubs 2")
+
+##### Find Members
+
+![Find Members](final_images/FindMembers.png "Find Members")
+
+##### Student Profile Page
+
+![Student Profile Page](final_images/StudentProfilePage.png "Student Profile Page")
+
+##### Club Profile Page
+
+![Club Profile Page](final_images/ClubProfilePage.png "Club Profile Page")
+
+##### Member Profile Page
+
+![Member Profile Page](final_images/MemberProfilePage.png "Member Profile Page")
+
 
 ### API:
 
@@ -37,6 +88,7 @@
 | Read Posts     | /read-posts     | GET, Read posts                                        | QUERY: { email: String, type: String }                               |
 | Update Post    | /update-post    | POST, Update a post                                    | BODY: { postID: String, text: String }                               |
 
+
 ### Database:
 
 | Collection Name | Schema                                                                                                                                                                                            |
@@ -53,26 +105,16 @@
     - members: Stores the names of the club's members
     - posts: Stores the ObjectId's of the club's posts
 
-### URL Routes / Mapping
-
-| Page Name            | Route                      | Description                                                 | Restrictions        |
-|----------------------|----------------------------|-------------------------------------------------------------| --------------------|
-| Landing Page         | /                          | Serves as login and signup page                             | None                |
-| Home Page            | /home-page                 | Serves as entry point to the controls                       | Logged In           |
-| Personal Page        | /personal-page             | Serves as page for user to edit their profile               | Logged In           |
-| Find Friends/Clubs   | /find-friends-clubs        | Serves as page for students to search for friends and clubs | Logged in, Students |
-| Find Members         | /find-members              | Serves as page for clubs to search for their members        | Logged in, Clubs    |
-| Student Profile Page | /profile-page?type=student | Serves as page for students viewing other students profiles | Logged In, Students |
-| Club Profile Page    | /profile-page?type=club    | Serves as page for students viewing clubs profiles          | Logged In, Students |
-| Member Profile Page  | /profile-page?type=member  | Serves as page for clubs viewing their members profiles     | Logged In, Clubs    |
 
 ### Authentication
 
 We use Passport.js to handle user authentication. Users login/signup on the landing page which uses Passport's Local Strategy to serialize and deserialize the user on login with a username and password. We also use CryptoJS to generate salt and hashes of the password for even more secure authentication. The user is only able to access the Landing Page (route: /landing-page) without logging in. If the user logs in as a student they can access every page but Find Members (route: /find-members). If the user logs in as a club they can access every page but Find Friends/Clubs (route: /find-friends-clubs).
 
+
 ### Deployment
 
 https://floating-basin-00309.herokuapp.com/
+
 
 ### Division of Labor
 - Gary Szekely
@@ -146,8 +188,11 @@ https://floating-basin-00309.herokuapp.com/
         - Club Home Page
         - Club Personal Page
 
+
 ### Conclusion
+We felt we should have more rigorously planned out our project so that there would be less changes from our vision to the final product, which wasted our time.
 
 ### Rubric
+
 
 ### Video

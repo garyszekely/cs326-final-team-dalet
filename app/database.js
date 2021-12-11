@@ -121,16 +121,11 @@ export async function readMembers(email, searchFor) {
 
 	const club = await clubs.findOne({'email': email});
 	const searchedMembers = [];
-	console.log(club['members'])
 	for(let member of club['members']) {
-		console.log(member)
-		console.log(searchFor)
-		console.log(member.includes(searchFor))
 		if (member.includes(searchFor)) {
 			searchedMembers.push(await students.findOne({'name': member}));
 		}
 	}
-	console.log(searchedMembers)
 	return searchedMembers;
 }
 
@@ -411,8 +406,8 @@ export async function readPosts(email, type) {
 		const club = await clubs.findOne({'email': email});
 		const clubPosts = [];
 		for (let postID of club['posts']) {
-			const post = await posts.findOne({'_id': postID});
-			studentPosts.push(post);
+			const post = await posts.findOne({'_id': ObjectId(postID)});
+			clubPosts.push(post);
 		}
 		return clubPosts;
 	} else {
