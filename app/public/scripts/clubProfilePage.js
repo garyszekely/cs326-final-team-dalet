@@ -1,7 +1,42 @@
 'use strict';
 
-window.addEventListener('load', async () => {
+window.onload = async () => {
     const email = localStorage.getItem('profileEmail');
+
+    const isMemberRes = await fetch('/is-member?email=' + email);
+    if (isMemberRes.ok) {
+        const isMember = await isMemberRes.json();
+        const controlsContainer = document.getElementById('controls-container');
+        controlsContainer.innerHTML = null;
+        if (isMember['is_member']) {
+            const leaveClubBtn = document.createElement('button');
+            leaveClubBtn.innerHTML = 'Leave Club';
+            leaveClubBtn.id = 'controls-btn';
+            leaveClubBtn.classList.add('btn');
+            leaveClubBtn.classList.add('btn-primary');
+
+            leaveClubBtn.addEventListener('click', async () => {
+                await fetch('/leave-club?email=' + email);
+                window.location.href = "/profile-page?type=club"
+            })
+
+            controlsContainer.appendChild(leaveClubBtn);
+        } else {
+            const joinClubBtn = document.createElement('button');
+            joinClubBtn.innerHTML = 'Join Club';
+            joinClubBtn.id = 'controls-btn';
+            joinClubBtn.classList.add('btn');
+            joinClubBtn.classList.add('btn-primary');
+
+            joinClubBtn.addEventListener('click', async () => {
+                await fetch('/join-club?email=' + email);
+
+                window.location.href = "/profile-page?type=club"
+            })
+
+            controlsContainer.appendChild(joinClubBtn);
+        }
+    }
 
     const clubRes = await fetch('/read-club?email=' + email);
     if (clubRes.ok) {
@@ -70,40 +105,6 @@ window.addEventListener('load', async () => {
         window.location.href = '/home-page';
     }
 
-    const isMemberRes = await fetch('/is-member?email=' + email);
-    if (isMemberRes.ok) {
-        const isMember = (await isMemberRes.json())['is_member'];
-        const controlsContainer = document.getElementById('controls-container');
-        controlsContainer.innerHTML = null;
-        if (isMember) {
-            const leaveClubBtn = document.createElement('button');
-            leaveClubBtn.innerHTML = 'Leave Club';
-            leaveClubBtn.id = 'controls-btn';
-            leaveClubBtn.classList.add('btn');
-            leaveClubBtn.classList.add('btn-primary');
-
-            leaveClubBtn.addEventListener('click', async () => {
-                await fetch('/leave-club?email=' + email);
-                window.location.reload();
-            })
-
-            controlsContainer.appendChild(leaveClubBtn);
-        } else {
-            const joinClubBtn = document.createElement('button');
-            joinClubBtn.innerHTML = 'Join Club';
-            joinClubBtn.id = 'controls-btn';
-            joinClubBtn.classList.add('btn');
-            joinClubBtn.classList.add('btn-primary');
-
-            joinClubBtn.addEventListener('click', async () => {
-                await fetch('/join-club?email=' + email);
-                window.location.reload();
-            })
-
-            controlsContainer.appendChild(joinClubBtn);
-        }
-    }
-
     const controlsContainer = document.getElementById('controls-container');
     const likeClubBtn = document.createElement('button');
     likeClubBtn.innerHTML = 'Like Club';
@@ -117,9 +118,9 @@ window.addEventListener('load', async () => {
     })
 
     controlsContainer.appendChild(likeClubBtn);
+}
 
-    document.getElementById('logout-btn').addEventListener('click', async () => {
-        await fetch('/logout');
-        window.location.href = '/';
-    });
+document.getElementById('logout-btn').addEventListener('click', async () => {
+    await fetch('/logout');
+    window.location.href = '/';
 });
