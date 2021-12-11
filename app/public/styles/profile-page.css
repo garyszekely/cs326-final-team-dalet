@@ -113,7 +113,7 @@
     padding-top: 20px;
 }
 
-#add-friends-btn, #join-club-btn, #remove-member-btn, #like-club-btn {
+#controls-btn {
     background-color: transparent;
     color: green;
     border-color: green;
@@ -126,7 +126,7 @@
     align-items: center;
 }
 
-#add-friends-btn:hover, #join-club-btn:hover, #remove-member-btn:hover, #like-club-btn:hover {
+#controls-btn:hover {
     background-color: green;
     color: white;
     font-weight: bold;

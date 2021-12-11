@@ -5,7 +5,12 @@ import expressSession from 'express-session';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import dotenv from 'dotenv';
-import { authenticateStudent, authenticateClub, createStudent, readStudent, readStudents, createClub, readClub, createPost, readPosts, updatePost, readClubs } from './database.js';
+import { 
+	authenticateStudent, authenticateClub, 
+	createStudent, readStudent, readStudents, isFriend, addFriend, removeFriend, isMember, joinClub, leaveClub, likeClub,
+	createClub, readClub, readClubs, removeMember,
+	createPost, readPosts, updatePost,  
+} from './database.js';
 
 /**
  * Initialization
@@ -198,6 +203,81 @@ app.get('/logout', (req, res) => {
 	res.end();
 });
 
+app.get('/is-friend', isLoggedIn, async (req, res) => {
+	const userEmail = req.user['email'];
+	const profileEmail = req.query['email'];
+
+	res.send(JSON.stringify({'is_friend': await isFriend(userEmail, profileEmail)}));
+	res.end();
+});
+
+app.get('/add-friend', isLoggedIn, async (req, res) => {
+	const userEmail = req.user['email'];
+	const profileEmail = req.query['email'];
+
+	if (await addFriend(userEmail, profileEmail)) {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(400);
+	}
+	res.end();
+});
+
+app.get('/remove-friend', isLoggedIn, async (req, res) => {
+	const userEmail = req.user['email'];
+	const profileEmail = req.query['email'];
+
+	if (await removeFriend(userEmail, profileEmail)) {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(400);
+	}
+	res.end();
+});
+
+app.get('/is-member', isLoggedIn, async (req, res) => {
+	const userEmail = req.user['email'];
+	const profileEmail = req.query['email'];
+
+	res.send(JSON.stringify({'is_member': await isMember(userEmail, profileEmail)}));
+	res.end();
+});
+
+app.get('/join-club', isLoggedIn, async (req, res) => {
+	const userEmail = req.user['email'];
+	const profileEmail = req.query['email'];
+
+	if (await joinClub(userEmail, profileEmail)) {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(400);
+	}
+	res.end();
+});
+
+app.get('/leave-club', isLoggedIn, async (req, res) => {
+	const userEmail = req.user['email'];
+	const profileEmail = req.query['email'];
+
+	if (await leaveClub(userEmail, profileEmail)) {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(400);
+	}
+	res.end();
+});
+
+app.get('/like-club', isLoggedIn, async (req, res) => {
+	const email = req.query['email'];
+
+	if (await likeClub(email)) {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(400);
+	}
+	res.end();
+});
+
 // Create Student
 // Body: {email: string, password: string, name: string}
 app.post('/create-student', async (req, res) => {
@@ -210,7 +290,6 @@ app.post('/create-student', async (req, res) => {
 	} else {
 		res.sendStatus(400);
 	}
-
 	res.end();
 });
 
@@ -281,6 +360,18 @@ app.get('/read-clubs', isLoggedIn, async (req, res) => {
 	const clubs = await readClubs(searchFor);
 
 	res.send(JSON.stringify(clubs));
+	res.end();
+});
+
+app.get('/remove-member', isLoggedIn, async (req, res) => {
+	const userEmail = req.user['email'];
+	const profileEmail = req.query['email'];
+
+	if (await removeMember(userEmail, profileEmail)) {
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(400);
+	}
 	res.end();
 })
 

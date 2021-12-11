@@ -68,10 +68,20 @@ window.addEventListener('load', async () => {
     } else {
         window.location.href = '/home-page';
     }
-    
-    document.getElementById('remove-member-btn').addEventListener('click', () => {
-        
-    });
+
+    const controlsContainer = document.getElementById('controls-container');
+    const removeMemberBtn = document.createElement('button');
+    removeMemberBtn.innerHTML = 'Remove Member';
+    removeMemberBtn.id = 'controls-btn';
+    removeMemberBtn.classList.add('btn');
+    removeMemberBtn.classList.add('btn-primary');
+
+    removeMemberBtn.addEventListener('click', async () => {
+        await fetch('/remove-member?email=' + email);
+        window.location.href = '/find-members';
+    })
+
+    controlsContainer.appendChild(removeMemberBtn);
 
     document.getElementById('logout-btn').addEventListener('click', async () => {
         await fetch('/logout');

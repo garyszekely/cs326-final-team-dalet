@@ -77,14 +77,14 @@ export async function createStudent(email, password, name) {
 		return false;
 	}
 
-	const [salt, hash] = mc.hash(password);
+	const [ salt, hash ] = mc.hash(password);
 
 	const student = {
 		'email': email,
 		'salt': salt,
 		'hash': hash,
 		'name': name,
-		'bio': 'No Bio',
+		'bio': 'No bio',
 		'joined': new Date().toLocaleDateString('en-US', {month: 'short', year: 'numeric'}),
 		'friends': [],
 		'clubs': [],
@@ -126,6 +126,105 @@ export async function updateStudent(email) {
 
 }
 
+// isFriend(userEmail: string, profileEmail: string) => boolean
+export async function isFriend(userEmail, profileEmail) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const students = database.collection('students');
+	const user = await students.findOne({'email': userEmail});
+	const profile = await students.findOne({'email': profileEmail});
+	
+	return user['friends'].some((friend) => {
+		return friend.equals(profile['_id']);
+	});
+}
+
+export async function addFriend(userEmail, profileEmail) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const students = database.collection('students');
+	const user = await students.findOne({'email': userEmail});
+	const profile = await students.findOne({'email': profileEmail});
+
+	await students.updateOne({'email': userEmail}, {$push: {'friends': profile['_id']}});
+	await students.updateOne({'email': profileEmail}, {$push: {'friends': user['_id']}});
+
+	return true;
+}
+
+export async function removeFriend(userEmail, profileEmail) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const students = database.collection('students');
+	const user = await students.findOne({'email': userEmail});
+	const profile = await students.findOne({'email': profileEmail});
+
+	await students.updateOne({'email': userEmail}, {$pull: {'friends': profile['_id']}});
+	await students.updateOne({'email': profileEmail}, {$pull: {'friends': user['_id']}});
+
+	return true;
+}
+
+export async function isMember(userEmail, profileEmail) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const students = database.collection('students');
+	const clubs = database.collection('clubs');
+
+	const user = await students.findOne({'email': userEmail});
+	const profile = await clubs.findOne({'email': profileEmail});
+	
+	return profile['members'].some((member) => {
+		return member == user['name'];
+	});
+}
+
+export async function joinClub(userEmail, profileEmail) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const students = database.collection('students');
+	const clubs = database.collection('clubs');
+
+	const user = await students.findOne({'email': userEmail});
+	const profile = await clubs.findOne({'email': profileEmail});
+
+	students.updateOne({'email': userEmail}, {$push: {'clubs': profile['name']}});
+	clubs.updateOne({'email': profileEmail}, {$push: {'members': user['name']}});
+
+	return true;
+}
+
+export async function leaveClub(userEmail, profileEmail) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const students = database.collection('students');
+	const clubs = database.collection('clubs');
+
+	const user = await students.findOne({'email': userEmail});
+	const profile = await clubs.findOne({'email': profileEmail});
+
+	students.updateOne({'email': userEmail}, {$pull: {'clubs': profile['name']}});
+	clubs.updateOne({'email': profileEmail}, {$pull: {'members': user['name']}});
+	
+	return true;
+}
+
+export async function likeClub(email) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const clubs = database.collection('clubs');
+	await clubs.updateOne({'email': email}, {$inc: {'totalLikes': 1}});
+
+	return true;
+}
+
 /**
  * CRUD Operations for Clubs
  * 
@@ -147,14 +246,14 @@ export async function createClub(email, password, name) {
 		return false;
 	}
 
-	const [salt, hash] = mc.hash(password);
+	const [ salt, hash ] = mc.hash(password);
 
 	const club = {
 		'email': email,
 		'salt': salt,
 		'hash': hash,
 		'name': name,
-		'bio': 'No Bio',
+		'bio': 'No bio',
 		'totalLikes': 0,
 		'joined': new Date().toLocaleDateString('en-US', {month: 'short', year: 'numeric'}),
 		'members': [],
@@ -196,6 +295,20 @@ export async function readClubs(searchFor) {
 
 export async function updateClub(email) {
 
+}
+
+export async function removeMember(userEmail, profileEmail) {
+	await client.connect();
+	const database = client.db('club_connect_db');
+
+	const clubs = database.collection('clubs');
+	const user = await clubs.findOne({'email': userEmail});
+	const profile = await clubs.findOne({'email': profileEmail});
+
+	await clubs.updateOne({'email': userEmail}, {$pull: {'members': profile['_id']}});
+	await clubs.updateOne({'email': profileEmail}, {$pull: {'clubs': user['name']}});
+
+	return true;
 }
 
 export async function updateClubInfo(email, name, meet, contac, place) {

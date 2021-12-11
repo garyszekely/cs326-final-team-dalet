@@ -1,6 +1,7 @@
 'use strict';
 
 window.addEventListener('load', async () => {
+
     const email = localStorage.getItem('profileEmail');
 
     const studentRes = await fetch('/read-student?email=' + email);
@@ -24,7 +25,7 @@ window.addEventListener('load', async () => {
             }
         } else {
             document.getElementById('clubs-members-container').innerHTML = null;
-            document.getElementById('clubs-members-container').innerHTML = 'No Clubs';
+            document.getElementById('clubs-members-container').innerHTML = 'No clubs';
         }
 
         const postsRes = await fetch('/read-posts?email=' + email + '&type=student');
@@ -62,18 +63,48 @@ window.addEventListener('load', async () => {
                     document.getElementById('posts').appendChild(card);
                 }
             } else {
-                document.getElementById('posts').innerHTML = 'No Posts';
+                document.getElementById('posts').innerHTML = 'No posts';
             }
         } else {
             document.getElementById('posts').innerHTML = 'Error loading posts...';
         }
+
+        const isFriendRes = await fetch('/is-friend?email=' + email);
+        if (isFriendRes.ok) {
+            const isFriend = (await isFriendRes.json())['is_friend'];
+            const controlsContainer = document.getElementById('controls-container');
+            controlsContainer.innerHTML = null;
+            if (isFriend) {
+                const removeFriendBtn = document.createElement('button');
+                removeFriendBtn.innerHTML = 'Remove Friend';
+                removeFriendBtn.id = 'controls-btn';
+                removeFriendBtn.classList.add('btn');
+                removeFriendBtn.classList.add('btn-primary');
+
+                removeFriendBtn.addEventListener('click', async () => {
+                    await fetch('/remove-friend?email=' + email);
+                    window.location.reload();
+                })
+
+                controlsContainer.appendChild(removeFriendBtn);
+            } else {
+                const addFriendBtn = document.createElement('button');
+                addFriendBtn.innerHTML = 'Add Friend';
+                addFriendBtn.id = 'controls-btn';
+                addFriendBtn.classList.add('btn');
+                addFriendBtn.classList.add('btn-primary');
+
+                addFriendBtn.addEventListener('click', async () => {
+                    await fetch('/add-friend?email=' + email);
+                    window.location.reload();
+                })
+
+                controlsContainer.appendChild(addFriendBtn);
+            }
+        }
     } else {
         window.location.href = '/home-page';
     }
-});
-
-document.getElementById('add-friends-btn').addEventListener('click', () => {
-        
 });
 
 document.getElementById('logout-btn').addEventListener('click', async () => {
