@@ -205,7 +205,7 @@ We felt we should have more rigorously planned out our project so that there wou
 
 ## Frontend **___ / 50 pts**
 
-- Landing Page **___ / 5 pts**
+- Landing Page **___ / 10 pts**
   - Login
     - User authentication with salt and hash
   - Signup
@@ -222,16 +222,16 @@ We felt we should have more rigorously planned out our project so that there wou
 - Club Personal Page **___ / 1 pts**
   - logut
 
-- Find Friends/Club Page **___ / 5 pts**
+- Find Friends/Club Page **___ / 6 pts**
   - Find students by name
   - Find clubs by name
   - Click to view profile pages
 
-- Find Members Page **___ / 5 pts**
+- Find Members Page **___ / 6 pts**
   - Find members by name
   - Click to view profile pages
 
-- Student Profile Page **___ / 5 pts**
+- Student Profile Page **___ / 8 pts**
   - View student information
     - Name
     - Bio
@@ -240,7 +240,7 @@ We felt we should have more rigorously planned out our project so that there wou
     - Joined
   - Add/remove friend
 
-- Club Profile Page **___ / 5 pts**
+- Club Profile Page **___ / 8 pts**
   - View club information
     - Name
     - Bio
@@ -249,7 +249,7 @@ We felt we should have more rigorously planned out our project so that there wou
     - Joined
   - Join/leave club
 
-- Member Profile Page **___ / 5 pts**
+- Member Profile Page **___ / 8 pts**
   - View member information
     - Name
     - Bio
