@@ -1,11 +1,12 @@
 window.addEventListener('load', async () => {
-    const res = await fetch('/read-student');
+    const email = localStorage.getItem('profileEmail');
+    const res = await fetch('/read-student?email=' + email);
     const data = await res.json();
     
     document.getElementById('schedule').innerHTML = '';
     for (let club of data.clubs) {
         const e = document.createElement('li');
-        e.innerHTML = club.name + ' ' + club.meeting;
+        e.innerHTML = club;
         document.getElementById('schedule').appendChild(e);
     }
 });

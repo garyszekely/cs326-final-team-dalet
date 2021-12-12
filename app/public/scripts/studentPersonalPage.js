@@ -1,5 +1,6 @@
 window.addEventListener('load', async () => {
-    const res = await fetch('/read-student');
+    const email = localStorage.getItem('profileEmail');
+    const res = await fetch('/read-student?email=' + email);
     const data = await res.json();
 
     document.getElementById('name').innerHTML = data.name;
@@ -13,14 +14,16 @@ window.addEventListener('load', async () => {
     document.getElementById('student-description').innerHTML = data.bio;
 
     document.getElementById('post-list').innerHTML = '';
-    for (let post of data.posts) {
+    const posts = await fetch('/read-posts?email=' + email + '&type=student');
+    for (let post of posts) {
         const e = document.createElement('li');
-        e.innerHTML = post;
+        e.innerHTML = post.text;
         document.getElementById('post-list').appendChild(e);
     }
 
     document.getElementById('friend-list').innerHTML = '';
-    for (let friend of data.friends) {
+    const arr_friends = ["Tom", "Tim"];
+    for (let friend of arr_friends) {
         const e = document.createElement('li');
         e.innerHTML = friend;
         document.getElementById('friend-list').appendChild(e);
