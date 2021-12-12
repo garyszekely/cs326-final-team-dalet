@@ -37,9 +37,17 @@ Our web application allows for students and clubs to interact with one another o
 ![Landing Page 2](final_images/LandingPage2.png "Landing Page 2")
 ![Landing Page 3](final_images/LandingPage3.png "Landing Page 3")
 
-##### Home Page
+##### Club Home Page
+(final_images/club_homepage.png)
 
-##### Personal Page
+##### Club Personal Page
+(final_images/club_personal_page.png )
+
+##### Student Home Page
+(final_images/student_homepage.png)
+
+##### Student Personal Page
+(final_images/student_personal_page.png)
 
 ##### Find Friends/Clubs
 
@@ -202,34 +210,17 @@ We felt we should have more rigorously planned out our project so that there wou
     - User authentication with salt and hash
   - Signup
 
-- Student Home Page  **___ / 5 pts**
-  - View profile pic
-  - View schedule (not working)
-  - View description
+- Student Home Page  **___ / 1 pts**
+  - logout
 
-- Student Personal Page **___ / 5 pts**
-  - View profile pic
-  - View name
-  - View club
-  - View description
-  - View posts
-  - View friends
+- Student Personal Page **___ / 1 pts**
+  - logout
 
-- Club Home Page **___ / 5 pts**
-  - View profile pic
-  - View number of likes
-  - View club info (if available)
-    - club name
-    - meeting
-    - contact
-    - location
-  - View description
+- Club Home Page **___ / 1 pts**
+  - logout
 
-- Club Personal Page **___ / 5 pts**
-  - View profile pic
-  - Identify members
-  - Edit club info
-  - Edit decription
+- Club Personal Page **___ / 1 pts**
+  - logut
 
 - Find Friends/Club Page **___ / 5 pts**
   - Find students by name
@@ -286,3 +277,5 @@ We felt we should have more rigorously planned out our project so that there wou
 ### Video
 
 https://www.youtube.com/watch?v=OM0axBR7OoU&list=PLbTmqqGclWPKulyyrGo2EIt9z1ZfMprdO&index=18&t=14s
+
+
