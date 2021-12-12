@@ -220,7 +220,7 @@ We felt we should have more rigorously planned out our project so that there wou
   - logout
 
 - Club Personal Page **___ / 1 pts**
-  - logut
+  - logout
 
 - Find Friends/Club Page **___ / 6 pts**
   - Find students by name
