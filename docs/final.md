@@ -38,16 +38,16 @@ Our web application allows for students and clubs to interact with one another o
 ![Landing Page 3](final_images/LandingPage3.png "Landing Page 3")
 
 ##### Club Home Page
-(final_images/club_homepage.png)
+![Club Homepage](final_images/club_homepage.png)
 
 ##### Club Personal Page
-(final_images/club_personal_page.png )
+![Club Personal Page](final_images/club_personal_page.png )
 
 ##### Student Home Page
-(final_images/student_homepage.png)
+![Student Homepage](final_images/student_homepage.png)
 
 ##### Student Personal Page
-(final_images/student_personal_page.png)
+![Student Personal Page](final_images/student_personal_page.png)
 
 ##### Find Friends/Clubs
 
