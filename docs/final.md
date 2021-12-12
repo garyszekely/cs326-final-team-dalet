@@ -258,11 +258,11 @@ We felt we should have more rigorously planned out our project so that there wou
     - Joined
   - Remove member
 
-## Backend **___ / 50pts**
+## Backend **___ / 40 pts**
 
-- CRUD Students  **___ / 20 pts**
+- CRUD Students  **___ / 15 pts**
 
-- CRUD Clubs **___ / 20 pts**
+- CRUD Clubs **___ / 15 pts**
 
 - CRUD Posts **___ / 10 pts**
 
